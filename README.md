@@ -15,10 +15,23 @@ pnpm install
 
 ## Setup Database
 
+Copy `.env` file from `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+For production, change `.env` database URL to Turso and fill the token:
+
+```bash
+DB_URL=libsql://example-db.turso.io
+DB_TOKEN=example-token-123
+```
+
 Create and seed the database:
 
 ```bash
-pnpm run db:setup
+pnpm run db:push
 pnpm run db:generate
 pnpm run db:migrate
 pnpm run db:seed
@@ -39,13 +52,6 @@ pnpm dev
 ```
 
 ## Production
-
-Change .env database URL to Turso and fill the token:
-
-```bash
-DB_URL=libsql://example-db.turso.io
-DB_TOKEN=example-token-123
-```
 
 Build for production:
 
