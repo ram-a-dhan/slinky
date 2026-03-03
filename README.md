@@ -1,75 +1,60 @@
-# Nuxt Minimal Starter
+# Slinky - URL Shortener
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Requirements
 
-## Setup
+- `node` >= 18.x.x
+- `pnpm` >= 10.30.3
 
-Make sure to install dependencies:
+## Initialization
+
+Install the dependencies:
 
 ```bash
-# npm
-npm install
-
-# pnpm
 pnpm install
+```
 
-# yarn
-yarn install
+## Setup Database
 
-# bun
-bun install
+Create and seed the database:
+
+```bash
+pnpm run db:setup
+pnpm run db:generate
+pnpm run db:migrate
+pnpm run db:seed
+```
+
+Use Drizzle Studio to check database:
+
+```bash
+pnpm run db:studio
 ```
 
 ## Development Server
 
-Start the development server on `http://localhost:3000`:
+Start dev server on `http://localhost:3000`:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
 pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
 ## Production
 
-Build the application for production:
+Change .env database URL to Turso and fill the token:
 
 ```bash
-# npm
-npm run build
+DB_URL=libsql://example-db.turso.io
+DB_TOKEN=example-token-123
+```
 
-# pnpm
+Build for production:
+
+```bash
 pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
 ```
 
-Locally preview production build:
+Preview production build:
 
 ```bash
-# npm
-npm run preview
-
-# pnpm
 pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
