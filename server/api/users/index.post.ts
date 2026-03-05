@@ -1,6 +1,5 @@
 import { eq } from "drizzle-orm";
 import { users as userSchema } from "#server/database/schema";
-import { REGEX } from "#shared/utils/constants";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -27,16 +26,19 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Email already registered.",
     });
 
-    const newUser = await db
+    const newUsers = await db
       .insert(userSchema)
       .values({
         email,
         username: email.split("@")[0]!,
       })
-      .returning()
-      .get();
+      .returning();
 
-    return newUser;
+    return {
+      statusCode: 201,
+      statusMessage: "User created.",
+      data: newUsers[0],
+    };
   } catch (error) {
     return error;
   }
