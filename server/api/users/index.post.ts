@@ -6,12 +6,12 @@ export default defineEventHandler(async (event) => {
     const email: string | undefined = (await readBody(event))?.email;
 
     if (!email) throw createError({
-      statusCode: 400,
+      statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Email required.",
     });
 
     if (!REGEX.EMAIL.test(email)) throw createError({
-      statusCode: 400,
+      statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Email invalid.",
     });
 
@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
       .where(eq(userSchema.email, email));
 
     if (users.length) throw createError({
-      statusCode: 400,
+      statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Email already registered.",
     });
 
@@ -35,7 +35,7 @@ export default defineEventHandler(async (event) => {
       .returning();
 
     return {
-      statusCode: 201,
+      statusCode: HTTP_STATUS.CREATED,
       statusMessage: "User created.",
       data: newUsers[0],
     };

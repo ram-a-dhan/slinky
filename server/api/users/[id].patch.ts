@@ -7,17 +7,17 @@ export default defineEventHandler(async (event) => {
     const username = (await readBody(event))?.username;
 
     if (!id) throw createError({
-      statusCode: 400,
+      statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "User ID required.",
     });
 
     if (!username) throw createError({
-      statusCode: 400,
+      statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Username required.",
     });
 
     if (!REGEX.USERNAME.test(username)) throw createError({
-      statusCode: 400,
+      statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Username invalid. Must be 8-16 characters, alphanumeric, underscores, or hyphens.",
     });
 
@@ -28,7 +28,7 @@ export default defineEventHandler(async (event) => {
       .where(eq(userSchema.id, id));
 
     if (!users.length) throw createError({
-      statusCode: 404,
+      statusCode: HTTP_STATUS.NOT_FOUND,
       statusMessage: "User not found.",
     });
 
@@ -42,7 +42,7 @@ export default defineEventHandler(async (event) => {
       .returning();
 
     return {
-      statusCode: 200,
+      statusCode: HTTP_STATUS.OK,
       statusMessage: "User updated.",
       data: updatedUsers[0],
     };
