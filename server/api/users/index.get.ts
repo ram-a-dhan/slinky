@@ -3,13 +3,18 @@ import { users as userSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
-    const {
+    let {
       page = 1,
-      limit = 10,
+      size = 10,
       sort = "createdAt",
       order = "asc",
       search = undefined,
     }: IParams<IUser> = getQuery(event);
+
+    page = Number(page);
+    size = Number(size);
+    const offset = (page - 1) * size;
+    const orderBy = order === "asc" ? asc : desc;
 
     if (search && search.length < 4) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
@@ -28,14 +33,18 @@ export default defineEventHandler(async (event) => {
             )
           : undefined,
       )
-      .orderBy((order === "asc" ? asc : desc)(userSchema[sort]))
-      .limit(Number(limit))
-      .offset(((Number(page)) - 1) * Number(limit));
+      .orderBy(orderBy(userSchema[sort]))
+      .limit(size)
+      .offset(offset);
 
     return {
       statusCode: HTTP_STATUS.OK,
       statusMessage: "Users fetched.",
       data: users,
+      paging: {
+        page,
+        size,
+      },
     }
   } catch (error) {
     return error;
