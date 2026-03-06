@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     const id = getRouterParams(event)?.id;
 
     if (!id) throw createError({
-      statusCode: 400,
+      statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "User ID required.",
     });
 
@@ -17,7 +17,7 @@ export default defineEventHandler(async (event) => {
       .where(eq(userSchema.id, id));
 
     if (!users.length) throw createError({
-      statusCode: 404,
+      statusCode: HTTP_STATUS.NOT_FOUND,
       statusMessage: "User not found.",
     });
 
@@ -26,7 +26,11 @@ export default defineEventHandler(async (event) => {
       .set({ lastAccessedAt: new Date() })
       .where(eq(userSchema.id, id));
 
-    return users[0];
+    return {
+      statusCode: HTTP_STATUS.OK,
+      statusMessage: "User fetched.",
+      data:users[0],
+    };
   } catch (error) {
     return error;
   }

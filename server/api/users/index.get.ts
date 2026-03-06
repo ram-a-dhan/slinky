@@ -12,7 +12,7 @@ export default defineEventHandler(async (event) => {
     }: IParams<IUser> = getQuery(event);
 
     if (search && search.length < 4) throw createError({
-      statusCode: 400,
+      statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Search query must be at least 4 characters long."
     });
 
@@ -32,7 +32,11 @@ export default defineEventHandler(async (event) => {
       .limit(Number(limit))
       .offset(((Number(page)) - 1) * Number(limit));
 
-    return users;
+    return {
+      statusCode: HTTP_STATUS.OK,
+      statusMessage: "Users fetched.",
+      data: users,
+    }
   } catch (error) {
     return error;
   }
