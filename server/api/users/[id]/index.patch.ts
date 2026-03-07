@@ -34,10 +34,7 @@ export default defineEventHandler(async (event) => {
 
     const updatedUsers = await db
       .update(userSchema)
-      .set({
-        username,
-        lastAccessedAt: new Date(),
-      })
+      .set({ username })
       .where(eq(userSchema.id, id))
       .returning();
 
