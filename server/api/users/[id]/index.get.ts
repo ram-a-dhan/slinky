@@ -21,11 +21,6 @@ export default defineEventHandler(async (event) => {
       statusMessage: "User not found.",
     });
 
-    await db
-      .update(userSchema)
-      .set({ lastAccessedAt: new Date() })
-      .where(eq(userSchema.id, id));
-
     return {
       statusCode: HTTP_STATUS.OK,
       statusMessage: "User fetched.",
