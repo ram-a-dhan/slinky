@@ -17,4 +17,6 @@ export const HTTP_METHOD = {
 export const REGEX = {
   EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   USERNAME: /^[\w\-]{8,16}$/,
+  LINK_SOURCE: /[\w\-]{8,}/,
+  LINK_TARGET: /https?:\/\/[^\s]+/,
 };

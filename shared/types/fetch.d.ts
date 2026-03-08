@@ -6,6 +6,10 @@ export interface IParams<T = {}> {
   search?: string;
 }
 
+export interface IParamsLink extends IParams<ILink> {
+  userId?: string;
+}
+
 export type IRes<T = any> = T extends void ? {
   statusCode: number;
   statusMessage: string;
