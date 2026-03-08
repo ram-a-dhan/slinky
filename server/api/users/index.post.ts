@@ -30,7 +30,7 @@ export default defineEventHandler(async (event) => {
       .insert(userSchema)
       .values({
         email,
-        username: email.split("@")[0]!,
+        username: email.split("@")[0]!.replace(/[\.]/gim, "-"),
       })
       .returning();
 
