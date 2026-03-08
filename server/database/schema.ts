@@ -10,7 +10,7 @@ export const users = sqliteTable("users", {
 
 export const links = sqliteTable("links", {
   id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
-  source: text("source").notNull().unique(),
+  slug: text("slug").notNull().unique(),
   target: text("target").notNull(),
   userId: text("user_id").references(() => users.id),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),

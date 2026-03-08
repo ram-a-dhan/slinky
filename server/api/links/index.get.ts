@@ -27,7 +27,7 @@ export default defineEventHandler(async (event) => {
 
     if (search) whereClause.push(
       or(
-        like(linkSchema.source, `%${search}%`),
+        like(linkSchema.slug, `%${search}%`),
         like(linkSchema.target, `%${search}%`),
       )
     );

@@ -9,7 +9,7 @@ export interface IUser {
 
 export interface ILink {
   id: string;
-  source: string;
+  slug: string;
   target: string;
   userId?: string;
   createdAt: Date;
