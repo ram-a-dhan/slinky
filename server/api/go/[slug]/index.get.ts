@@ -3,18 +3,18 @@ import { links as linkSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
-    const source = getRouterParams(event)?.source;
+    const slug = getRouterParams(event)?.slug;
 
-    if (!source) throw createError({
+    if (!slug) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Link source required.",
+      statusMessage: "Link slug required.",
     });
 
     const db = useDb();
     const links = await db
       .select()
       .from(linkSchema)
-      .where(eq(linkSchema.source, source));
+      .where(eq(linkSchema.slug, slug));
 
     if (!links.length) throw createError({
       statusCode: HTTP_STATUS.NOT_FOUND,

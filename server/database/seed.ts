@@ -24,11 +24,11 @@ const seed = async () => {
     const selectedUser = await db.select().from(users).where(eq(users.email, exampleUsers[0]!.email));
     const exampleLinks = [
       {
-        source: "dQw4w9WgXcQ",
+        slug: "dQw4w9WgXcQ",
         target: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
       },
       {
-        source: "examplelink",
+        slug: "examplelink",
         target: "https://www.example.com",
         userId: selectedUser[0]!.id,
       }

@@ -1,6 +1,6 @@
 CREATE TABLE `links` (
 	`id` text PRIMARY KEY NOT NULL,
-	`source` text NOT NULL,
+	`slug` text NOT NULL,
 	`target` text NOT NULL,
 	`user_id` text,
 	`created_at` integer NOT NULL,
@@ -8,7 +8,7 @@ CREATE TABLE `links` (
 	FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON UPDATE no action ON DELETE no action
 );
 --> statement-breakpoint
-CREATE UNIQUE INDEX `links_source_unique` ON `links` (`source`);--> statement-breakpoint
+CREATE UNIQUE INDEX `links_slug_unique` ON `links` (`slug`);--> statement-breakpoint
 CREATE TABLE `users` (
 	`id` text PRIMARY KEY NOT NULL,
 	`email` text NOT NULL,

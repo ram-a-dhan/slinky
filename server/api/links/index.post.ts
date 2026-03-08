@@ -3,11 +3,11 @@ import { links as linkSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
-    const body: { source?: string; target?: string, userId?: string } = await readBody(event);
+    const body: { slug?: string; target?: string, userId?: string } = await readBody(event);
 
-    if (!body?.source) throw createError({
+    if (!body?.slug) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Link source required.",
+      statusMessage: "Link slug required.",
     });
 
     if (!body?.target) throw createError({
@@ -15,9 +15,9 @@ export default defineEventHandler(async (event) => {
       statusMessage: "Link target required.",
     });
 
-    if (!REGEX.LINK_SOURCE.test(body.source)) throw createError({
+    if (!REGEX.LINK_SLUG.test(body.slug)) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Link source invalid.",
+      statusMessage: "Link slug invalid.",
     });
 
     if (!REGEX.LINK_TARGET.test(body.target)) throw createError({
@@ -29,17 +29,17 @@ export default defineEventHandler(async (event) => {
     const links = await db
       .select()
       .from(linkSchema)
-      .where(eq(linkSchema.source, body.source));
+      .where(eq(linkSchema.slug, body.slug));
 
     if (links.length) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Link source already exists.",
+      statusMessage: "Link slug already exists.",
     });
 
     const newLinks = await db
       .insert(linkSchema)
       .values({
-        source: body.source,
+        slug: body.slug,
         target: body.target,
         userId: body.userId || null,
       })
