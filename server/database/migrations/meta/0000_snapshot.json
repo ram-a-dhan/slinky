@@ -14,8 +14,8 @@
           "notNull": true,
           "autoincrement": false
         },
-        "source": {
-          "name": "source",
+        "slug": {
+          "name": "slug",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
@@ -51,10 +51,10 @@
         }
       },
       "indexes": {
-        "links_source_unique": {
-          "name": "links_source_unique",
+        "links_slug_unique": {
+          "name": "links_slug_unique",
           "columns": [
-            "source"
+            "slug"
           ],
           "isUnique": true
         }
