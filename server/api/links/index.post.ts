@@ -1,45 +1,66 @@
+import { nanoid } from "nanoid";
 import { eq } from "drizzle-orm";
-import { links as linkSchema } from "#server/database/schema";
+import { users as userSchema, links as linkSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
     const body: { slug?: string; target?: string, userId?: string } = await readBody(event);
 
-    if (!body?.slug) throw createError({
-      statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Link slug required.",
-    });
+    // Allow either both slug and userId are present or both absent.
+    if (!body?.slug && body?.userId || body?.slug && !body?.userId) {
+        throw createError({
+        statusCode: HTTP_STATUS.BAD_REQUEST,
+        statusMessage: "Link slug required.",
+      });
+    }
 
     if (!body?.target) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Link target required.",
     });
 
-    if (!REGEX.LINK_SLUG.test(body.slug)) throw createError({
-      statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Link slug invalid.",
-    });
+    if (body?.slug && !REGEX.LINK_SLUG.test(body.slug))
+      throw createError({
+        statusCode: HTTP_STATUS.BAD_REQUEST,
+        statusMessage: "Link slug invalid, must be minimum 8 characters aphanumeric, underscore, or hyphen.",
+      });
 
-    if (!REGEX.LINK_TARGET.test(body.target)) throw createError({
-      statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Link target invalid.",
-    });
+    if (body?.target && !REGEX.LINK_TARGET.test(body.target))
+      throw createError({
+        statusCode: HTTP_STATUS.BAD_REQUEST,
+        statusMessage: "Link target invalid, must be valid HTTP/HTTPS URL.",
+      });
 
     const db = useDb();
-    const links = await db
-      .select()
-      .from(linkSchema)
-      .where(eq(linkSchema.slug, body.slug));
 
-    if (links.length) throw createError({
-      statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Link slug already exists.",
-    });
+    if (body?.slug) {
+      const links = await db
+        .select()
+        .from(linkSchema)
+        .where(eq(linkSchema.slug, body.slug));
+
+      if (links.length) throw createError({
+        statusCode: HTTP_STATUS.CONFLICT,
+        statusMessage: "Link slug already exists.",
+      });
+    }
+
+    if (body?.userId) {
+      const users = await db
+        .select()
+        .from(userSchema)
+        .where(eq(userSchema.id, body.userId));
+
+      if (!users.length) throw createError({
+        statusCode: HTTP_STATUS.NOT_FOUND,
+        statusMessage: "User not found.",
+      });
+    }
 
     const newLinks = await db
       .insert(linkSchema)
       .values({
-        slug: body.slug,
+        slug: body.slug || nanoid(16),
         target: body.target,
         userId: body.userId || null,
       })
