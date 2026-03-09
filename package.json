@@ -19,6 +19,7 @@
   "dependencies": {
     "@libsql/client": "^0.17.0",
     "drizzle-orm": "^0.45.1",
+    "nanoid": "^5.1.6",
     "nuxt": "^4.3.1",
     "vue": "^3.5.28",
     "vue-router": "^4.6.4"
