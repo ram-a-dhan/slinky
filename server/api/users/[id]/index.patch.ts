@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, eq, ne } from "drizzle-orm";
 import { users as userSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
@@ -30,6 +30,17 @@ export default defineEventHandler(async (event) => {
     if (!users.length) throw createError({
       statusCode: HTTP_STATUS.NOT_FOUND,
       statusMessage: "User not found.",
+    });
+
+    const existingUsers = await db
+      .select()
+      .from(userSchema)
+      .where(and(eq(userSchema.username, username), ne(userSchema.id, id)))
+      .limit(1);
+
+    if (existingUsers.length) throw createError({
+      statusCode: HTTP_STATUS.CONFLICT,
+      statusMessage: "Username already exists.",
     });
 
     const updatedUsers = await db
