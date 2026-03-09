@@ -1,37 +1,45 @@
-import { eq } from "drizzle-orm";
-import { links as linkSchema } from "#server/database/schema";
+import { and, eq, ne } from "drizzle-orm";
+import { users as userSchema, links as linkSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
     const id = getRouterParams(event)?.id;
-    const body: { slug?: string; target?: string } = await readBody(event);
+    const body: { slug?: string; target?: string, userId?: string } = await readBody(event);
 
     if (!id) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Link ID required.",
     });
 
-    if (!body.slug) throw createError({
+    if (!body?.userId) throw createError({
+      statusCode: HTTP_STATUS.BAD_REQUEST,
+      statusMessage: "User ID required.",
+    });
+
+    if (!body?.slug) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Link slug required.",
     });
 
-    if (!body.target) throw createError({
+    if (!body?.target) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Link target required.",
     });
 
-    if (!REGEX.LINK_SLUG.test(body.slug)) throw createError({
-      statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Link slug invalid.",
-    });
+    if (body?.slug && !REGEX.LINK_SLUG.test(body.slug))
+      throw createError({
+        statusCode: HTTP_STATUS.BAD_REQUEST,
+        statusMessage: "Link slug invalid, must be minimum 8 characters aphanumeric, underscore, or hyphen.",
+      });
 
-    if (!REGEX.LINK_TARGET.test(body.target)) throw createError({
-      statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Link target invalid.",
-    });
+    if (body?.target && !REGEX.LINK_TARGET.test(body.target))
+      throw createError({
+        statusCode: HTTP_STATUS.BAD_REQUEST,
+        statusMessage: "Link target invalid, must be valid HTTP/HTTPS URL.",
+      });
 
     const db = useDb();
+
     const links = await db
       .select()
       .from(linkSchema)
@@ -40,6 +48,22 @@ export default defineEventHandler(async (event) => {
     if (!links.length) throw createError({
       statusCode: HTTP_STATUS.NOT_FOUND,
       statusMessage: "Link not found.",
+    });
+
+    if (links[0]?.userId !== body.userId) throw createError({
+      statusCode: HTTP_STATUS.BAD_REQUEST,
+      statusMessage: "User ID does not match link owner.",
+    });
+
+    const existingLinks = await db
+      .select()
+      .from(linkSchema)
+      .where(and(eq(linkSchema.slug, body.slug), ne(linkSchema.id, id)))
+      .limit(1);
+
+    if (existingLinks.length) throw createError({
+      statusCode: HTTP_STATUS.CONFLICT,
+      statusMessage: "Link slug already exists.",
     });
 
     const updatedLinks = await db
