@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { users as userSchema } from "#server/database/schema";
+import { users as userSchema, links as linkSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -11,11 +11,20 @@ export default defineEventHandler(async (event) => {
     });
 
     const db = useDb();
-    const result = await db
-      .delete(userSchema)
-      .where(eq(userSchema.id, id));
+    const result = await db.transaction(async (tx) => {
+      const links = await tx
+        .delete(linkSchema)
+        .where(eq(linkSchema.userId, id));
+      const user = await tx
+        .delete(userSchema)
+        .where(eq(userSchema.id, id));
+      return {
+        user,
+        links,
+      };
+    });
 
-    if (!result.rowsAffected) throw createError({
+    if (!result.user.rowsAffected && !result.links.rowsAffected) throw createError({
       statusCode: HTTP_STATUS.NOT_FOUND,
       statusMessage: "User not found.",
     });
