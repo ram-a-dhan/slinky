@@ -45,7 +45,19 @@ pnpm run db:studio
 
 ## Development Server
 
-Start dev server on `http://localhost:3000`:
+Edit your `hosts` file:
+
+```bash
+sudo nano /etc/hosts 
+```
+
+Add this line:
+
+```bash
+127.0.0.1       dev.slinky.app
+```
+
+Start dev server on `http://dev.slinky.app:3000`:
 
 ```bash
 pnpm dev
