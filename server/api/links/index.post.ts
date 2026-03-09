@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 import { eq } from "drizzle-orm";
-import { links as linkSchema } from "#server/database/schema";
+import { users as userSchema, links as linkSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -33,15 +33,27 @@ export default defineEventHandler(async (event) => {
 
     const db = useDb();
 
-    if (body?.slug && body?.userId) {
+    if (body?.slug) {
       const links = await db
         .select()
         .from(linkSchema)
         .where(eq(linkSchema.slug, body.slug));
 
       if (links.length) throw createError({
-        statusCode: HTTP_STATUS.BAD_REQUEST,
+        statusCode: HTTP_STATUS.CONFLICT,
         statusMessage: "Link slug already exists.",
+      });
+    }
+
+    if (body?.userId) {
+      const users = await db
+        .select()
+        .from(userSchema)
+        .where(eq(userSchema.id, body.userId));
+
+      if (!users.length) throw createError({
+        statusCode: HTTP_STATUS.NOT_FOUND,
+        statusMessage: "User not found.",
       });
     }
 

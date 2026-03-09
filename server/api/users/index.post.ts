@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
       .where(eq(userSchema.email, email));
 
     if (users.length) throw createError({
-      statusCode: HTTP_STATUS.BAD_REQUEST,
+      statusCode: HTTP_STATUS.CONFLICT,
       statusMessage: "Email already registered.",
     });
 
