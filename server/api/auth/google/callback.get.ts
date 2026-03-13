@@ -19,8 +19,6 @@ interface IResUser {
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig();
 
-  console.log(config);
-
   // 1. Get code from Google redirect.
   const query = getQuery(event);
   const code = query.code as string | undefined;
