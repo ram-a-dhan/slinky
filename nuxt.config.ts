@@ -1,12 +1,28 @@
+import Aura from "@primeuix/themes/aura";
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
+  css: ["~/assets/scss/main.scss", "primeicons/primeicons.css"],
   devServer: {
     host: "dev.slinky.app",
     port: 3000,
   },
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   future: { compatibilityVersion: 4 },
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "@primevue/nuxt-module"],
+  primevue: {
+    autoImport: true,
+    options: {
+      ripple: true,
+      theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: "system",
+          cssLayer: false,
+        },
+      },
+    },
+  },
   runtimeConfig: {
     DB_URL: process.env.DB_URL,
     DB_TOKEN: process.env.DB_TOKEN,
