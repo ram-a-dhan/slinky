@@ -37,7 +37,8 @@ export default defineEventHandler(async (event) => {
       const links = await db
         .select()
         .from(linkSchema)
-        .where(eq(linkSchema.slug, body.slug));
+        .where(eq(linkSchema.slug, body.slug))
+        .limit(1);
 
       if (links.length) throw createError({
         statusCode: HTTP_STATUS.CONFLICT,

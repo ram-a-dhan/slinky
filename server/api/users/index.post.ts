@@ -19,7 +19,8 @@ export default defineEventHandler(async (event) => {
     const users = await db
       .select()
       .from(userSchema)
-      .where(eq(userSchema.email, email));
+      .where(eq(userSchema.email, email))
+      .limit(1);
 
     if (users.length) throw createError({
       statusCode: HTTP_STATUS.CONFLICT,
@@ -30,7 +31,7 @@ export default defineEventHandler(async (event) => {
       .insert(userSchema)
       .values({
         email,
-        username: email.split("@")[0]!.replace(/[\.]/gim, "-"),
+        username: email.split("@")[0]!.replace(/[\_\-\.]/gim, ""),
       })
       .returning();
 
