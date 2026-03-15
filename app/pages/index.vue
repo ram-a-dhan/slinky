@@ -2,11 +2,17 @@
 <script setup lang="ts">
 definePageMeta({ middleware: "guest" });
 
+const isShowLogin = ref(false);
+
 const { isLoggedIn, signIn } = useAuthStore();
 
 watchEffect(() => {
   if (isLoggedIn) navigateTo('/dashboard');
-})
+});
+
+const setIsShowLogin = () => {
+  isShowLogin.value = !isShowLogin.value;
+};
 </script>
 
 <template>
@@ -15,23 +21,35 @@ watchEffect(() => {
     <template #end>
       <Button
         severity="secondary"
-        icon="pi pi-google"
-        label="Sign in with Google" 
-        @click="signIn"
+        icon="pi pi-sign-in"
+        label="Sign In"
+        @click="setIsShowLogin"
       />
     </template>
   </Toolbar>
 </div>
-<div class="welcome">
 
+<div class="welcome">
   <div class="welcome__card">
     <div class="welcome__title">
       <h1>🐍 Slinky</h1>
       <p>URL Shortener</p>
     </div>
-
   </div>
 </div>
+
+<Dialog v-model:visible="isShowLogin" modal header="Sign In">
+  <div class="login-modal">
+    <p>Sign in to have customizable shortlinks.</p>
+  
+    <Button
+      severity="info"
+      icon="pi pi-google"
+      label="Sign In with Google"
+      @click="signIn"
+    />
+  </div>
+</Dialog>
 </template>
 
 <style scoped lang="scss">
@@ -58,5 +76,10 @@ watchEffect(() => {
     text-align: center;
   }
 }
-  
+
+.login-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
 </style>
