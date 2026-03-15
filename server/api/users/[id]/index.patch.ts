@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
 
     if (!REGEX.USERNAME.test(username)) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "Username invalid. Must be 8-16 characters, alphanumeric, underscores, or hyphens.",
+      statusMessage: "Username invalid. Must be 8-16 alphanumeric characters.",
     });
 
     const db = useDb();
