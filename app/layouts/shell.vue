@@ -78,7 +78,7 @@ const settingItems = ref([
       <nav class="drawer__nav">
         <Menu :model="navItems">
           <template #item="{ item }">
-            <NuxtLink :to="item.path" class="nav-item" @click="setIsShowDrawer">
+            <NuxtLink :to="item.path"  v-ripple class="p-ripple nav-item" @click="setIsShowDrawer">
               <i :class="item.icon" />
               <span>{{ item.label }}</span>
             </NuxtLink>
@@ -88,7 +88,7 @@ const settingItems = ref([
       <div class="drawer__settings">
         <Menu :model="settingItems">
           <template #item="{ item }">
-            <div role="button" class="nav-item" @click="item.action">
+            <div role="button"  v-ripple class="p-ripple nav-item" @click="item.action">
               <i :class="item.icon" />
               {{ item.label }}
             </div>
@@ -105,7 +105,7 @@ const settingItems = ref([
     <nav class="sidebar__nav">
       <Menu :model="navItems">
         <template #item="{ item }">
-          <NuxtLink :to="item.path" class="nav-item">
+          <NuxtLink :to="item.path"  v-ripple class="p-ripple nav-item">
             <i :class="item.icon" />
             <span>{{ item.label }}</span>
           </NuxtLink>
@@ -115,7 +115,7 @@ const settingItems = ref([
     <div class="sidebar__settings">
       <Menu :model="settingItems">
         <template #item="{ item }">
-          <div role="button" class="nav-item" @click="item.action">
+          <div role="button"  v-ripple class="p-ripple nav-item" @click="item.action">
             <i :class="item.icon" />
             {{ item.label }}
           </div>
