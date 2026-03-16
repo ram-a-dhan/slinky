@@ -10,6 +10,29 @@ export default defineEventHandler(async (event) => {
       statusMessage: "User ID required.",
     });
 
+    // Revoke Google account access.
+    const token = getCookie(event, "auth_token");
+
+    if (!token) throw createError({
+      statusCode: HTTP_STATUS.NOT_AUTHENTICATED,
+      statusMessage: "Not authenticated. Please sign in again.",
+    });
+
+    const payload = verifyJwt(token);
+
+    if (!payload) throw createError({
+      statusCode: HTTP_STATUS.NOT_AUTHENTICATED,
+      statusMessage: "Token invalid. Please sign in again.",
+    });
+
+    if (payload.googleAccessToken) {
+      await $fetch(
+        `https://oauth2.googleapis.com/revoke?token=${payload.googleAccessToken}`,
+        { method: HTTP_METHOD.POST },
+      ).catch(() => null);
+    }
+
+    // Delete user from DB.
     const db = useDb();
     const result = await db.transaction(async (tx) => {
       const links = await tx
