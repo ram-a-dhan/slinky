@@ -37,7 +37,7 @@ const confirm = useConfirm();
 const toast = useToast();
 const confirmSignOut = () => {
   return confirm.require({
-    header: "Sign Out?",
+    header: "Sign Out",
     message: "Are you sure you want to sign out?",
     icon: "pi pi-info-circle",
     acceptProps: {
@@ -129,8 +129,8 @@ const settingItems = ref([
       <h2>{{ pageName }}</h2>
       <Button
       v-if="isMobile"
+      severity="contrast"
       variant="text"
-      severity="secondary"
       icon="pi pi-bars"
       @click="setIsShowDrawer"
       />
@@ -167,10 +167,6 @@ const settingItems = ref([
 
   &__settings {
     margin-top: auto;
-
-    .nav-item {
-      cursor: pointer;
-    }
   }
 }
 
@@ -182,10 +178,6 @@ const settingItems = ref([
 
   &__settings {
     margin-top: auto;
-
-    .nav-item {
-      cursor: pointer;
-    }
   }
 }
 
@@ -195,6 +187,8 @@ const settingItems = ref([
   padding: 0.75rem;
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
+  user-select: none;
 }
 
 .layout {
