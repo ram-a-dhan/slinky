@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 export interface jwtPayload {
   userId: string;
   email: string;
+  googleAccessToken: string;
 }
 
 export const signJwt = (payload: jwtPayload): string => {
