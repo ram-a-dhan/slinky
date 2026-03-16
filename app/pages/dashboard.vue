@@ -6,6 +6,7 @@ const confirm = useConfirm();
 
 const popoverRef = ref();
 const isShowChangeUsername = ref(false);
+const isShowDeleteAccount = ref(false);
 const userSettings = ref(
   [
     {
@@ -15,6 +16,24 @@ const userSettings = ref(
           label: "Change Username",
           icon: "pi pi-tag",
           action: () => isShowChangeUsername.value = true,
+        },
+        {
+          label: "Delete Account",
+          icon: "pi pi-trash",
+          action: () => confirm.require({
+            header: "Delete Account",
+            message: `Hold up! You are about to delete your account which cannot be undone. Deleting your account will also delete all your links. Are you sure you want to proceed?`,
+            icon: "pi pi-exclamation-triangle",
+            acceptProps: {
+              severity: "danger",
+              label: "Proceed",
+            },
+            rejectProps: {
+              severity: "secondary",
+              label: "Cancel",
+            },
+            accept: () => isShowDeleteAccount.value = true,
+          }),
         },
       ]
     }
@@ -58,6 +77,7 @@ const toggleUserSettings = (event: any) => {
 </Toolbar>
 
 <ChangeUsernameModal v-model:visible="isShowChangeUsername" />
+<DeleteAccountModal v-model:visible="isShowDeleteAccount" />
 </template>
 
 <style scoped lang="scss">
