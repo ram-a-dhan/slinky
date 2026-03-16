@@ -84,6 +84,7 @@ export default defineEventHandler(async (event) => {
   const token = signJwt({
     userId: users[0]!.id,
     email: users[0]!.email,
+    googleAccessToken: tokenResponse.access_token,
   });
 
   // 6. Set JWT as cookie.
