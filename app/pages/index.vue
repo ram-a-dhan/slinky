@@ -20,7 +20,8 @@ const setIsShowLogin = () => {
   <Toolbar>
     <template #end>
       <Button
-        severity="secondary"
+        severity="contrast"
+        variant="text"
         icon="pi pi-sign-in"
         label="Sign In"
         @click="setIsShowLogin"

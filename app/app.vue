@@ -7,6 +7,6 @@
   <NuxtPage />
 </NuxtLayout>
 
-<ConfirmDialog />
+<ConfirmDialog style="width: 500px;" />
 <Toast />
 </template>
