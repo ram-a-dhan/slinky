@@ -13,13 +13,17 @@ Install the dependencies:
 pnpm install
 ```
 
-## Setup Database
+## Setup
+
+### Dotenv
 
 Copy `.env` file from `.env.example`:
 
 ```bash
 cp .env.example .env
 ```
+
+### Database
 
 For production, change `.env` database URL to Turso and fill the token:
 
@@ -41,6 +45,23 @@ Use Drizzle Studio to check database:
 
 ```bash
 pnpm run db:studio
+```
+
+### Google Sign-In
+
+Make a new OAuth Conset Screen project at [Google Cloud Console](google-cloud) and add the credentials to your `.env`:
+
+```bash
+GOOGLE_CLIENT_ID=your-client-id
+GOOGLE_CLIENT_SECRET=your-client-secret
+```
+
+[google-cloud]: https://console.cloud.google.com/projectcreate
+
+For production, change your redirect URI:
+
+```bash
+GOOGLE_REDIRECT_URI=http://<YOUR_DOMAIN>/api/auth/google/callback
 ```
 
 ## Development Server
