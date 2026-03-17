@@ -98,7 +98,7 @@ const settingItems = ref([
     </aside>
   </Drawer>
 
-  <aside v-if="!isMobile" class="sidebar">
+  <aside v-else class="sidebar">
     <div class="sidebar__brand">
       <h1>🐍 Slinky</h1>
     </div>
@@ -126,7 +126,10 @@ const settingItems = ref([
   
   <div class="layout">
     <div class="topbar">
-      <h2>{{ pageName }}</h2>
+      <h2>
+        <span v-if="isMobile">🐍&nbsp;</span>
+        {{ pageName }}
+      </h2>
       <Button
       v-if="isMobile"
       severity="contrast"
@@ -154,12 +157,16 @@ const settingItems = ref([
 }
 
 .sidebar {
+  position: sticky;
+  top: 0;
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  height: 100vh;
+  height: 100dvh;
   padding: 1.25rem;
   border-right: 1px solid var(--p-toolbar-border-color);
-
+  
   &__brand h1 {
     font-size: 1.5rem;
     font-weight: bold;
@@ -198,15 +205,22 @@ const settingItems = ref([
 }
 
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 2;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1.25rem;
+  background-color: var(--default-bg);
   border-bottom: 1px solid var(--p-toolbar-border-color);
   font-size: 1rem;
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   padding: 1.25rem;
 }
 </style>
