@@ -21,13 +21,18 @@ export default defineEventHandler(async (event) => {
   const users = await db
     .select()
     .from(userSchema)
-    .where(eq(userSchema.id, payload.userId))
-    .limit(1);
+    .where(eq(userSchema.id, payload.userId));
 
   if (!users.length) throw createError({
     statusCode: HTTP_STATUS.NOT_FOUND,
     statusMessage: "User not found.",
   });
+
+  // Log access time for user.
+  await $fetch(
+    `/api/users/${users[0]?.id}/access`,
+    { method: HTTP_METHOD.POST },
+  ).catch(() => null);
 
   return users[0];
 });
