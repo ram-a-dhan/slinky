@@ -1,4 +1,4 @@
-import { asc, desc, like, or } from "drizzle-orm";
+import { asc, desc, ilike, or } from "drizzle-orm";
 import { users as userSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
@@ -16,7 +16,7 @@ export default defineEventHandler(async (event) => {
     const offset = (page - 1) * size;
     const orderBy = order === "asc" ? asc : desc;
 
-    if (search && search.length < 4) throw createError({
+    if (search && search.trim().length < 4) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Search query must be at least 4 characters long."
     });
@@ -28,14 +28,23 @@ export default defineEventHandler(async (event) => {
       .where(
         search
           ? or(
-              like(userSchema.email, `%${search}%`),
-              like(userSchema.username, `%${search}%`),
+              ilike(userSchema.email, `%${search}%`),
+              ilike(userSchema.username, `%${search}%`),
             )
           : undefined,
       )
       .orderBy(orderBy(userSchema[sort]))
       .limit(size)
       .offset(offset);
+
+    let total = 0;
+    if (page === 1) {
+      const userCount = await $fetch<IRes<{ count: number }>>(
+        "/api/users/count",
+        { query: { search } },
+      );
+      total = userCount.data.count;
+    }
 
     return {
       statusCode: HTTP_STATUS.OK,
@@ -44,6 +53,7 @@ export default defineEventHandler(async (event) => {
       paging: {
         page,
         size,
+        total,
       },
     }
   } catch (error) {
