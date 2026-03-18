@@ -1,4 +1,4 @@
-import { and, asc, desc, eq, isNull, like, or } from "drizzle-orm";
+import { and, asc, desc, eq, isNull, ilike, or } from "drizzle-orm";
 import { links as linkSchema } from "#server/database/schema";
 import { IParamsLink } from "~~/shared/types/fetch";
 
@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     const offset = (page - 1) * size;
     const orderBy = order === "asc" ? asc : desc;
 
-    if (search && search.length < 4) throw createError({
+    if (search && search.trim().length < 4) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Search query must be at least 4 characters long."
     });
@@ -27,9 +27,9 @@ export default defineEventHandler(async (event) => {
 
     if (search) whereClause.push(
       or(
-        like(linkSchema.slug, `%${search}%`),
-        like(linkSchema.target, `%${search}%`),
-      )
+        ilike(linkSchema.slug, `%${search}%`),
+        ilike(linkSchema.target, `%${search}%`),
+      ),
     );
     
     if (userId !== undefined && userId !== "undefined") {
@@ -49,6 +49,20 @@ export default defineEventHandler(async (event) => {
       .limit(size)
       .offset(offset);
 
+    let total = 0;
+    if (page === 1) {      
+      const linkCount = await $fetch<IRes<{ count: number }>>(
+        "/api/links/count",
+        {
+          query: {
+            search,
+            userId,
+          },
+        },
+      );
+      total = linkCount.data.count;
+    }
+
     return {
       statusCode: HTTP_STATUS.OK,
       statusMessage: "Links fetched.",
@@ -56,6 +70,7 @@ export default defineEventHandler(async (event) => {
       paging: {
         page,
         size,
+        total,
       },
     }
   } catch (error) {
