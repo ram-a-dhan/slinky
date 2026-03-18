@@ -32,4 +32,5 @@ export type IResPage<T = any> = T extends void ? {
 export interface IPaging {
   page: number;
   size: number;
+  total: number;
 }
