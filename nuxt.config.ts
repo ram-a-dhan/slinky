@@ -3,10 +3,11 @@ import Aura from "@primeuix/themes/aura";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   css: ["~/assets/scss/main.scss", "primeicons/primeicons.css"],
-  devServer: {
-    host: "dev.slinky.app",
-    port: 3000,
-  },
+  // Revert to localhost to avoid browser HSTS rule (mkcert as possible solution)
+  // devServer: {
+  //   host: "dev.slinky.app",
+  //   port: 3000,
+  // },
   devtools: { enabled: false },
   future: { compatibilityVersion: 4 },
   modules: ["@pinia/nuxt", "@primevue/nuxt-module"],
