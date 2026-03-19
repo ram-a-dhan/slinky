@@ -1,4 +1,4 @@
-import { and, count, eq, ilike, isNull, or } from "drizzle-orm";
+import { and, count, eq, like, isNull, or } from "drizzle-orm";
 import { links as linkSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
@@ -14,8 +14,8 @@ export default defineEventHandler(async (event) => {
 
     if (search) whereClause.push(
       or(
-          ilike(linkSchema.slug, `%${search}%`),
-          ilike(linkSchema.target, `%${search}%`),
+          like(linkSchema.slug, `%${search}%`),
+          like(linkSchema.target, `%${search}%`),
       ),
     );
       
