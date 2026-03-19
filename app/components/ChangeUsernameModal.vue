@@ -28,12 +28,8 @@ const resolver: IFormResolver<IFormValues> = ({ values }) => {
     errors.username.push({ message: "Username is required." });
   }
 
-  if (values.username && (values.username.length < 8 || values.username.length > 16)) {
-    errors.username.push({ message: "Username must be 8-16 characters." });
-  }
-
-  if (values.username && !/^[a-zA-Z0-9]+$/.test(values.username)) {
-    errors.username.push({ message: "Username must only be alphanumeric characters." });
+  if (values.username && !REGEX.USERNAME.test(values.username)) {
+    errors.username.push({ message: "Username must be 8-16 alphanumeric characters." });
   }
 
   return { errors };
@@ -41,15 +37,14 @@ const resolver: IFormResolver<IFormValues> = ({ values }) => {
 
 const onSubmit = async (event: FormSubmitEvent) => {
   if (!event.valid) {
-    event.errors.username?.forEach((e: any) => {
+    event.errors.username?.forEach((error: Error) => {
       toast.add({
         severity: "error",
         summary: "Form Validation",
-        detail: e.message,
+        detail: error.message,
         life: 3000,
       });
     });
-
     return;
   }
   
@@ -66,20 +61,21 @@ const onSubmit = async (event: FormSubmitEvent) => {
 
     if (response.statusCode === HTTP_STATUS.OK) {
       await auth.fetchUser();
-      visible.value = false;
       toast.add({
         severity: "success",
         summary: "Success",
         detail: response.statusMessage,
         life: 3000,
       });
+      visible.value = false;
     }
   } catch (error) {
     const { statusMessage } = error as IRes || {};
+    const { message } = error as Error || {};
     toast.add({
       severity: "error",
       summary: "Error",
-      detail: statusMessage,
+      detail: statusMessage || message,
       life: 3000,
     });
   } finally {
@@ -104,6 +100,7 @@ const onSubmit = async (event: FormSubmitEvent) => {
     class="user-form"
   >
     <span>Your username will be part of all of your shortlinks so make it catchy!</span>
+
     <div class="user-form__group">
       <label for="username">Username</label>
       <InputText
@@ -132,7 +129,7 @@ const onSubmit = async (event: FormSubmitEvent) => {
       <Button
         type="submit"
         severity="contrast"
-        label="Change"
+        label="Change Username"
         :loading="loading"
       />
     </div>

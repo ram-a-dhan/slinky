@@ -44,8 +44,8 @@ export const useDataTable = <T extends object>(
         totalRecords.value = response.paging.total;
       }
     } catch (error) {
-      const { statusMessage } = error as IRes;
-      const { message } = error as Error;
+      const { statusMessage } = error as IRes || {};
+      const { message } = error as Error || {};
       toast.add({
         severity: "error",
         summary: "Error",
@@ -84,6 +84,10 @@ export const useDataTable = <T extends object>(
     }
   };
 
+  const onRefresh = () => {
+    loadData();
+  };
+
   const onClear = () => {
     first.value = 0;
     search.value = undefined;
@@ -104,6 +108,7 @@ export const useDataTable = <T extends object>(
     onSort,
     search,
     onSearch,
+    onRefresh,
     onClear,
     refresh: loadData
   };
