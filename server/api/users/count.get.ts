@@ -1,4 +1,4 @@
-import { count, ilike, or } from "drizzle-orm";
+import { count, like, or } from "drizzle-orm";
 import { users as userSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
@@ -16,8 +16,8 @@ export default defineEventHandler(async (event) => {
       .from(userSchema)
       .where(search
         ? or(
-            ilike(userSchema.email, `%${search}%`),
-            ilike(userSchema.username, `%${search}%`),
+            like(userSchema.email, `%${search}%`),
+            like(userSchema.username, `%${search}%`),
           )
         : undefined
       );
