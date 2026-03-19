@@ -3,6 +3,10 @@ definePageMeta({ middleware: "auth", layout: "shell" });
 
 const auth = useAuthStore();
 
+const isShowLinkDetail = ref(false);
+const linkId = ref<string | undefined>();
+const refresh = ref<Function>(() => {});
+
 const fetchList = async (params: IParamsLink) => {
   params.userId = auth.user?.id;
   return await $fetch<IResPage<ILink>>("/api/links", { query: params })
@@ -19,7 +23,20 @@ const {
   search,
   onSearch,
   onClear,
+  onRefresh,
 } = useDataTable(fetchList);
+
+const setIsShowLinkDetail = (id?: string) => {
+  if (id) {
+    linkId.value = id;
+    refresh.value = onRefresh;
+    isShowLinkDetail.value = true;
+  } else {
+    linkId.value = undefined;
+    refresh.value = onClear;
+    isShowLinkDetail.value = true;
+  }
+};
 </script>
 
 <template>
@@ -31,6 +48,7 @@ const {
         variant="text"
         icon="pi pi-plus"
         label="New"
+        @click="() => setIsShowLinkDetail()"
       />
     </template>
     <template #end>
@@ -85,6 +103,7 @@ const {
                 variant="text"
                 icon="pi pi-pencil"
                 v-tooltip.top="{ value: 'Edit' }"
+                @click="() => setIsShowLinkDetail(slotProps.data.id)"
               />
           </div>
         </template>
@@ -99,6 +118,12 @@ const {
       </template>
     </DataTable>
   </div>
+
+  <LinkDetailModal
+    v-model:visible="isShowLinkDetail"
+    :linkId="linkId"
+    :refresh="refresh"
+  />
 </div>
 </template>
 
