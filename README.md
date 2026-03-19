@@ -49,22 +49,32 @@ pnpm run db:studio
 
 ### Google Sign-In
 
-Make a new OAuth Conset Screen project at [Google Cloud Console](google-cloud) and add the credentials to your `.env`:
+Make a new OAuth Consent Screen project at [Google Cloud Console](google-cloud) and add the credentials to your `.env`:
 
 ```bash
-GOOGLE_CLIENT_ID=your-client-id
-GOOGLE_CLIENT_SECRET=your-client-secret
+GOOGLE_CLIENT_ID=your-client-id-123
+GOOGLE_CLIENT_SECRET=your-client-secret-123
 ```
 
 [google-cloud]: https://console.cloud.google.com/projectcreate
 
-For production, change your redirect URI:
+Add the Google Redirect URI from the `.env` to Google Cloud Console's client's Authorized Redirect URIs:
+
+```baash
+http://localhost:3000/api/auth/google/callback
+```
+
+For production, change the redirect URI:
 
 ```bash
-GOOGLE_REDIRECT_URI=http://<YOUR_DOMAIN>/api/auth/google/callback
+GOOGLE_REDIRECT_URI=http://<YOUR.PRODUCTION.DOMAIN>/api/auth/google/callback
 ```
 
 ## Development Server
+
+<!-- 
+
+# Revert to localhost to avoid browser HSTS rule (mkcert as possible solution)
 
 Edit your `hosts` file:
 
@@ -79,6 +89,10 @@ Add this line:
 ```
 
 Start dev server on `http://dev.slinky.app:3000`:
+
+-->
+
+Start dev server on `http://localhost:3000`:
 
 ```bash
 pnpm dev
