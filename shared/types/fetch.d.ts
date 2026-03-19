@@ -25,7 +25,7 @@ export type IResPage<T = any> = T extends void ? {
 } : {
   statusCode: number;
   statusMessage: string;
-  data: T;
+  data: T[];
   paging: IPaging;
 }
 
