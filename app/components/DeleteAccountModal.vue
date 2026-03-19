@@ -28,15 +28,14 @@ const resolver: IFormResolver<IFormValues> = ({ values }) => {
 
 const onSubmit = async (event: FormSubmitEvent) => {
   if (!event.valid) {
-    event.errors.email?.forEach((e: any) => {
+    event.errors.email?.forEach((error: Error) => {
       toast.add({
         severity: "error",
         summary: "Form Validation",
-        detail: e.message,
+        detail: error.message,
         life: 3000,
       });
     });
-
     return;
   }
 
@@ -49,13 +48,13 @@ const onSubmit = async (event: FormSubmitEvent) => {
     );
 
     if (response.statusCode === HTTP_STATUS.OK) {
-      visible.value = false;
       toast.add({
         severity: "success",
         summary: "Success",
         detail: "We're sorry to see you go. You can join us again anytime.",
         life: 10000,
       });
+      visible.value = false;
       auth.signOut();
     }
   } catch (error) {
