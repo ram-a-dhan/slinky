@@ -3,6 +3,7 @@ definePageMeta({ middleware: "auth", layout: "shell" });
 
 const auth = useAuthStore();
 
+const isShowLinkShare = ref(false);
 const isShowLinkDetail = ref(false);
 const linkId = ref<string | undefined>();
 const refresh = ref<Function>(() => {});
@@ -25,6 +26,13 @@ const {
   onClear,
   onRefresh,
 } = useDataTable(fetchList);
+
+const setIsShowLinkShare = (id?: string) => {
+  if (id) {
+    linkId.value = id;
+    isShowLinkShare.value = true;
+  }
+};
 
 const setIsShowLinkDetail = (id?: string) => {
   if (id) {
@@ -97,6 +105,7 @@ const setIsShowLinkDetail = (id?: string) => {
                 variant="text"
                 icon="pi pi-share-alt"
                 v-tooltip.top="{ value: 'Share' }"
+                @click="() => setIsShowLinkShare(slotProps.data.id)"
               />
               <Button
                 severity="contrast"
@@ -119,6 +128,10 @@ const setIsShowLinkDetail = (id?: string) => {
     </DataTable>
   </div>
 
+  <LinkShareModal
+    v-model:visible="isShowLinkShare"
+    :linkId="linkId"
+  />
   <LinkDetailModal
     v-model:visible="isShowLinkDetail"
     :linkId="linkId"
