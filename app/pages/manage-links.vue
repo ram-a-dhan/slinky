@@ -149,12 +149,6 @@ const setIsShowLinkDetail = (id?: string) => {
 }
 
 .card {
-  padding: var(--p-toolbar-padding);
-  background: var(--p-toolbar-background);
-  border: 1px solid var(--p-toolbar-border-color);
-  color: var(--p-toolbar-color);
-  border-radius: var(--p-toolbar-border-radius);
-
   &__icon {
     display: block;
     font-size: 2rem;
