@@ -1,3 +1,15 @@
+:root {
+  --default-bg: #ffffff;
+
+  @media (prefers-color-scheme: light) {
+    --default-bg: #ffffff;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    --default-bg: #121212;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -12,4 +24,12 @@ html {
 
 body {
   font-family: "Lato", sans-serif;
+}
+
+.card {
+  padding: var(--p-toolbar-padding);
+  background: var(--p-toolbar-background);
+  border: 1px solid var(--p-toolbar-border-color);
+  color: var(--p-toolbar-color);
+  border-radius: var(--p-toolbar-border-radius);
 }

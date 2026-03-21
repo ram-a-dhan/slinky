@@ -1,6 +1,14 @@
 import Aura from "@primeuix/themes/aura";
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      title: "Slinky - URL Shortener",
+      link: [
+        { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }
+      ],
+    },
+  },
   compatibilityDate: "2025-07-15",
   css: ["~/assets/scss/main.scss", "primeicons/primeicons.css"],
   // Revert to localhost to avoid browser HSTS rule (mkcert as possible solution)

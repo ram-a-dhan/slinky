@@ -49,7 +49,12 @@ const confirmSignOut = () => {
       severity: "secondary",
     },
     accept: () => {
-      toast.add({ severity: "success", summary: "Signed Out", detail: "You have successfully signed out.", life: 3000  });
+      toast.add({
+        severity: "success",
+        summary: "Signed Out",
+        detail: "You have successfully signed out.",
+        life: 3000,
+      });
       signOut();
     },
   });
@@ -63,7 +68,6 @@ const navItems = ref([
 const settingItems = ref([
   { label: "Sign Out", icon: "pi pi-sign-out", action: confirmSignOut },
 ]);
-
 </script>
 
 <template>
@@ -74,6 +78,12 @@ const settingItems = ref([
     @update:visible="setIsShowDrawer"
     header="🐍 Slinky"
   >
+    <template #header>
+      <h2>
+        <img src="/favicon.svg" alt="Slinky Logo" class="logo">
+        Slinky
+      </h2>
+    </template>
     <aside class="drawer">
       <nav class="drawer__nav">
         <Menu :model="navItems">
@@ -100,7 +110,10 @@ const settingItems = ref([
 
   <aside v-else class="sidebar">
     <div class="sidebar__brand">
-      <h1>🐍 Slinky</h1>
+      <h1>
+        <img src="/favicon.svg" alt="Slinky Logo" class="logo">
+        Slinky
+      </h1>
     </div>
     <nav class="sidebar__nav">
       <Menu :model="navItems">
@@ -127,7 +140,9 @@ const settingItems = ref([
   <div class="layout">
     <div class="topbar">
       <h2>
-        <span v-if="isMobile">🐍&nbsp;</span>
+        <span v-if="isMobile">
+          <img src="/favicon.svg" alt="Slinky Logo" class="logo">
+        </span>
         {{ pageName }}
       </h2>
       <Button
@@ -215,6 +230,11 @@ const settingItems = ref([
   background-color: var(--default-bg);
   border-bottom: 1px solid var(--p-toolbar-border-color);
   font-size: 1rem;
+}
+
+.logo {
+  height: 1.15rem;
+  aspect-ratio: 1;
 }
 
 .content {
