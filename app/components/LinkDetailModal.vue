@@ -6,12 +6,17 @@ interface IProps {
   refresh: Function;
 }
 
+interface IFormValues {
+  slug: string;
+  target: string;
+}
+
 const visible = defineModel<boolean>("visible", { required: true });
 const props = defineProps<IProps>();
   
 const loading = ref(false);
 const header = ref("");
-const initialValues = ref<Pick<ILink, "slug" | "target">>({
+const initialValues = ref<IFormValues>({
   slug: "",
   target: "https://" ,
 });
@@ -67,8 +72,8 @@ const fetchDetail = async (id: string) => {
   }
 };
 
-const resolver: IFormResolver<ILinkFormValues> = ({ values }) => {
-  const errors: IFormResolverReturn<ILinkFormValues>["errors"] = {
+const resolver: IFormResolver<IFormValues> = ({ values }) => {
+  const errors: IFormResolverReturn<IFormValues>["errors"] = {
     slug: [],
     target: [],
   };
