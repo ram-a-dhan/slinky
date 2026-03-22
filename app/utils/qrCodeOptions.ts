@@ -1,22 +1,58 @@
 import slinky from "~/assets/images/slinky.png";
-import type { Options } from "qr-code-styling";
+import type { CornerDotType, CornerSquareType, DotType, GradientType, Options } from "qr-code-styling";
 
 export interface IQrCodeOptions {
   image?: string;
   color1?: string;
   color2?: string;
+  gradientType?: GradientType;
+  style?: IQrStyles;
+}
+
+export type IQrStyles = keyof IStyle;
+
+interface IStyle {
+  rounded: IStyleConfig;
+  circles: IStyleConfig;
+  diamond: IStyleConfig;
+}
+
+interface IStyleConfig {
+  dots: DotType;
+  cornerSquare: CornerSquareType;
+  cornerDot: CornerDotType;
 }
 
 export const qrCodeOptions = ({
   image = slinky,
-  color1 = "#00cc76",
-  color2 = "#90e36a",
+  color1 = "#000000",
+  color2 = "#000000",
+  gradientType = "linear",
+  style = "rounded",
 }: IQrCodeOptions = {}): Options => {
+  const styleOptions: IStyle = {
+    rounded: {
+      dots: "extra-rounded",
+      cornerSquare: "extra-rounded",
+      cornerDot: "extra-rounded",
+    },
+    circles: {
+      dots: "dots",
+      cornerSquare: "dot",
+      cornerDot: "dot",
+    },
+    diamond: {
+      dots: "classy-rounded",
+      cornerSquare: "classy-rounded",
+      cornerDot: "classy-rounded",
+    },
+  };
+
   return {
     type: "canvas",
     shape: "square",
-    width: 400,
-    height: 400,
+    width: 900,
+    height: 900,
     image,
     imageOptions: {
       saveAsBlob: true,
@@ -25,10 +61,10 @@ export const qrCodeOptions = ({
       margin: 0,
     },
     dotsOptions: {
-      type: "extra-rounded",
+      type: styleOptions[style].dots,
       roundSize: true,
       gradient: {
-        type: "linear",
+        type: gradientType,
         rotation: 0,
         colorStops: [
           {
@@ -43,10 +79,11 @@ export const qrCodeOptions = ({
       },
     },
     cornersSquareOptions: {
-      type: "extra-rounded",
+      type: styleOptions[style].cornerSquare,
       color: "#000000",
     },
     cornersDotOptions: {
+      type: styleOptions[style].cornerDot,
       color: "#000000",
     },
   };
