@@ -9,13 +9,20 @@ const visible = defineModel<boolean>("visible", { required: true });
 const props = defineProps<IProps>();
 
 const loading = ref(false);
-const shortlink = ref("");
-const qrBox = ref<HTMLDivElement | null>(null);
-const qrCode = ref<QRCodeStyling | null>(null);
 
 const auth = useAuthStore();
 const toast = useToast();
 const url = useRequestURL();
+
+const {
+  shortlink,
+  renderQRCode,
+  downloadQRCode,
+  copyShortLink,
+} = useShortLink({
+  url,
+  toast,
+});
 
 watch(visible, async (val) => {
   if (val === true && props.linkId) {
@@ -23,8 +30,7 @@ watch(visible, async (val) => {
     
     shortlink.value = `${url.origin}/${auth.user?.username}/${response?.data.slug}`;
 
-    await nextTick();
-    renderQRCode();
+    await renderQRCode();
   }
 });
 
@@ -45,49 +51,6 @@ const fetchDetail = async (id: string) => {
     visible.value = false;
   } finally {
     loading.value = false;
-  }
-};
-
-const renderQRCode = () => {
-  if (!shortlink.value || !qrBox.value) return;
-
-  qrCode.value = new QRCodeStyling({
-    width: 400,
-    height: 400,
-    data: shortlink.value,
-  });
-  qrBox.value.innerHTML = "";
-  qrCode.value.append(qrBox.value);
-};
-
-const downloadQRCode = () => {
-  if (!shortlink.value || !qrCode.value) return;
-
-  qrCode.value.download({
-    extension: "png",
-    name: shortlink.value
-      .replace(`${url.origin}/`, "slinky_")
-      .replace("/", "_"),
-  });
-};
-
-const copyShortlink = async () => {
-  try {
-    if (!shortlink.value) return;
-    await navigator.clipboard.writeText(shortlink.value);
-    toast.add({
-      severity: "success",
-      summary: "Copy Success",
-      detail: "Shortlink copied to clipboard.",
-      life: 3000,
-    });
-  } catch (error) {
-    toast.add({
-      severity: "error",
-      summary: "Copy Error",
-      detail: (error as Error).message,
-      life: 3000,
-    });
   }
 };
 </script>
@@ -122,7 +85,7 @@ const copyShortlink = async () => {
         severity="contrast"
         v-tooltip.top="{ value: 'Copy to Clipboard' }"
         icon="pi pi-clipboard"
-        @click="copyShortlink"
+        @click="copyShortLink"
         :disabled="loading"
       />
     </InputGroup>
