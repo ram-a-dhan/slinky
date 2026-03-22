@@ -2,6 +2,8 @@
 <script setup lang="ts">
 definePageMeta({ middleware: "guest" });
 
+import Hero from "~/assets/images/hero.svg";
+
 const isShowLogin = ref(false);
 
 const { isLoggedIn } = useAuthStore();
@@ -30,16 +32,8 @@ const setIsShowLogin = () => {
   </Toolbar>
 </div>
 
-<div class="welcome">
-  <div class="welcome__card">
-    <div class="welcome__title">
-      <h1>
-        <img src="/favicon.svg" alt="Slinky Logo" class="logo">
-        Slinky
-      </h1>
-      <p>URL Shortener</p>
-    </div>
-  </div>
+<div class="content">
+  <HomeCard />
 </div>
 
 <LoginModal v-model:visible="isShowLogin" />
@@ -55,23 +49,11 @@ const setIsShowLogin = () => {
   aspect-ratio: 1;
 }
 
-.welcome {
+.content {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  
-  &__card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    padding: 2rem;
-    width: 100%;
-  }
-
-  &__title {
-    text-align: center;
-  }
+  padding: 0 0.75rem 0.75rem;
 }
+
 </style>
