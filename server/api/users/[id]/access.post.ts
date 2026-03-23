@@ -10,11 +10,15 @@ export default defineEventHandler(async (event) => {
   });
 
   const db = useDb();
-
-  await db
+  const users = await db
     .update(userSchema)
     .set({ lastAccessedAt: new Date() })
     .where(eq(userSchema.id, id));
+
+  if (!users.rowsAffected) throw createError({
+    statusCode: HTTP_STATUS.NOT_FOUND,
+    statusMessage: "User not found.",
+  });
 
   return {
     statusCode: HTTP_STATUS.NO_CONTENT,

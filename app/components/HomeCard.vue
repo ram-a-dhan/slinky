@@ -80,7 +80,7 @@ const onSubmit = async (event: FormSubmitEvent) => {
       }
     );
 
-    shortlink.value = `${url.origin}/${response.data.slug}`;
+    shortlink.value = `${url.origin}/go/${response.data.slug}`;
     await renderQRCode();
 
     toast.add({
