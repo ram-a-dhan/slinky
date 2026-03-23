@@ -15,6 +15,7 @@ const visible = defineModel<boolean>("visible", { required: true });
 const props = defineProps<IProps>();
   
 const loading = ref(false);
+const loadingDelete = ref(false);
 const header = ref("");
 const initialValues = ref<IFormValues>({
   slug: "",
@@ -24,6 +25,7 @@ const formKey = ref(0);
 const slug = ref<string>("");
 
 const auth = useAuthStore();
+const confirm = useConfirm();
 const toast = useToast();
 const url = useRequestURL();
 
@@ -164,6 +166,57 @@ const onSubmit = async (event: FormSubmitEvent) => {
     loading.value = false;
   }
 };
+
+const onClickDelete = () => {
+  confirm.require({
+    header: "Delete Link",
+    icon: "pi pi-exclamation-triangle",
+    message: "Are you sure you want to delete this link?",
+    accept: onConfirmDelete,
+    acceptProps: {
+      severity: "danger",
+      icon: "pi pi-exclamation-triangle",
+      label: "Delete Link",
+    },
+    rejectProps: {
+      severity: "secondary",
+      label: "Cancel",
+    },
+  });
+};
+
+const onConfirmDelete = async () => {
+  try {
+    loadingDelete.value = true;
+
+    const response = await $fetch<IRes>(
+      `/api/links/${props.linkId}`,
+      { method: HTTP_METHOD.DELETE },
+    );
+
+    if (response.statusCode === HTTP_STATUS.OK) {
+      toast.add({
+        severity: "success",
+        summary: "Success",
+        detail: response.statusMessage,
+        life: 3000,
+      });
+      props.refresh();
+      visible.value = false;
+    }
+  } catch (error) {
+    const { statusMessage } = error as IRes || {};
+    const { message } = error as Error || {};
+    toast.add({
+      severity: "error",
+      summary: "Error",
+      detail: statusMessage || message,
+      life: 3000,
+    });
+  } finally {
+    loadingDelete.value = false;
+  }
+};
 </script>
 
 <template>
@@ -193,7 +246,7 @@ const onSubmit = async (event: FormSubmitEvent) => {
         id="slug"
         name="slug"
         v-model="slug"
-        :disabled="loading"
+        :disabled="loading || loadingDelete"
       />
       <Message
         v-for="error in $form.slug?.errors"
@@ -211,7 +264,7 @@ const onSubmit = async (event: FormSubmitEvent) => {
         fluid
         id="target"
         name="target"
-        :disabled="loading"
+        :disabled="loading || loadingDelete"
       />
       <Message
         v-for="error in $form.target?.errors"
@@ -225,16 +278,26 @@ const onSubmit = async (event: FormSubmitEvent) => {
 
     <div class="link-form__buttons">
       <Button
+        v-if="props.linkId"
+        severity="danger"
+        icon="pi pi-trash"
+        class="link-delete"
+        v-tooltip.top="{ value: 'Delete Link' }"
+        @click="onClickDelete"
+        :loading="loadingDelete"
+      />
+      <Button
         severity="secondary"
         label="Cancel"
         @click="visible = false"
-        :disabled="loading"
+        :disabled="loading || loadingDelete"
       />
       <Button
         type="submit"
         severity="contrast"
         :label="header"
         :loading="loading"
+        :disabled="loadingDelete"
       />
     </div>
   </Form>
@@ -262,6 +325,10 @@ const onSubmit = async (event: FormSubmitEvent) => {
     display: flex;
     justify-content: end;
     gap: 1.25rem;
+
+    .link-delete {
+      margin-right: auto;
+    }
   }
 }
 </style>
