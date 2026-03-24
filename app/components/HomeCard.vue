@@ -13,18 +13,15 @@ const initialValues = ref<IFormValues>({ target: "https://" });
 const formKey = ref(0);
 const loading = ref(false);
 
-const url = useRequestURL();
 const toast = useToast();
 
 const {
   shortlink,
   renderQRCode,
   downloadQRCode,
+  setShortLink,
   copyShortLink,
-} = useShortLink({
-  url,
-  toast,
-});
+} = useShortLink({ toast });
 
 const nextCard = () => {
   if (!cardSet.value) return;
@@ -80,7 +77,7 @@ const onSubmit = async (event: FormSubmitEvent) => {
       }
     );
 
-    shortlink.value = `${url.origin}/go/${response.data.slug}`;
+    setShortLink({ slug: response.data.slug });
     await renderQRCode();
 
     toast.add({
