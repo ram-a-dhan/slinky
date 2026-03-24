@@ -12,24 +12,25 @@ const loading = ref(false);
 
 const auth = useAuthStore();
 const toast = useToast();
-const url = useRequestURL();
 
 const {
   shortlink,
   renderQRCode,
   downloadQRCode,
+  setShortLink,
   copyShortLink,
 } = useShortLink({
-  url,
   toast,
 });
 
 watch(visible, async (val) => {
   if (val === true && props.linkId) {
     const response = await fetchDetail(props.linkId);
-    
-    shortlink.value = `${url.origin}/${auth.user?.username}/${response?.data.slug}`;
 
+    setShortLink({
+      slug: response?.data.slug!,
+      username: auth.user?.username!,
+    })
     await renderQRCode();
   }
 });
