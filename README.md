@@ -61,7 +61,7 @@ GOOGLE_CLIENT_SECRET=your-client-secret-123
 Add the Google Redirect URI from the `.env` to Google Cloud Console's client's Authorized Redirect URIs:
 
 ```baash
-http://localhost:3000/api/auth/google/callback
+http://dev.slin.ky:3000/api/auth/google/callback
 ```
 
 For production, change the redirect URI:
@@ -70,11 +70,15 @@ For production, change the redirect URI:
 GOOGLE_REDIRECT_URI=http://<YOUR.PRODUCTION.DOMAIN>/api/auth/google/callback
 ```
 
+### Miscellaneous
+
+For production, change the base URL to your production base URL:
+
+```bash
+BASE_URL=<YOUR.PRODUCTION.DOMAIN>
+```
+
 ## Development Server
-
-<!-- 
-
-# Revert to localhost to avoid browser HSTS rule (mkcert as possible solution)
 
 Edit your `hosts` file:
 
@@ -85,14 +89,10 @@ sudo nano /etc/hosts
 Add this line:
 
 ```bash
-127.0.0.1       dev.slinky.app
+127.0.0.1       dev.slin.ky
 ```
 
-Start dev server on `http://dev.slinky.app:3000`:
-
--->
-
-Start dev server on `http://localhost:3000`:
+Start dev server on `http://dev.slin.ky:3000`:
 
 ```bash
 pnpm dev

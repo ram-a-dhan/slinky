@@ -51,8 +51,8 @@ export const qrCodeOptions = ({
   return {
     type: "canvas",
     shape: "square",
-    width: 900,
-    height: 900,
+    width: 800,
+    height: 800,
     image,
     imageOptions: {
       saveAsBlob: true,

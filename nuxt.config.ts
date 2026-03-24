@@ -11,11 +11,10 @@ export default defineNuxtConfig({
   },
   compatibilityDate: "2025-07-15",
   css: ["~/assets/scss/main.scss", "primeicons/primeicons.css"],
-  // Revert to localhost to avoid browser HSTS rule (mkcert as possible solution)
-  // devServer: {
-  //   host: "dev.slinky.app",
-  //   port: 3000,
-  // },
+  devServer: {
+    host: "dev.slin.ky",
+    port: 3000,
+  },
   devtools: { enabled: false },
   future: { compatibilityVersion: 4 },
   modules: ["@pinia/nuxt", "@primevue/nuxt-module"],
@@ -39,5 +38,8 @@ export default defineNuxtConfig({
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     GOOGLE_REDIRECT_URI: process.env.GOOGLE_REDIRECT_URI,
+    public: {
+      BASE_URL: process.env.BASE_URL,
+    },
   },
 })

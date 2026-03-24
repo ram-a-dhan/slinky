@@ -27,7 +27,7 @@ const slug = ref<string>("");
 const auth = useAuthStore();
 const confirm = useConfirm();
 const toast = useToast();
-const url = useRequestURL();
+const url = useRuntimeConfig().public.BASE_URL as string;
 
 watch(visible, async (val) => {
   if (val === true) {
@@ -236,7 +236,7 @@ const onConfirmDelete = async () => {
   >
     <p>Your shortlink would look like this:</p>
     <p class="link-form__preview">
-      {{ url.origin }}/{{ auth.user?.username }}/{{slug.length >= 8 ? slug : "your-slug"}}
+      {{ url }}/{{ auth.user?.username }}/{{slug.length >= 8 ? slug : "your-slug"}}
     </p>
 
     <div class="link-form__group">
