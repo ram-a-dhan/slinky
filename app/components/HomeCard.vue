@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import type { FormSubmitEvent } from "@primevue/forms";
 import QRCodeStyling from "qr-code-styling";
 import { useShortLink } from "~/composables/useShortLink";
+import { useTurnstile } from "~/composables/useTurnstile";
+import type { FormSubmitEvent } from "@primevue/forms";
 
 interface IFormValues {
   target: string;
@@ -14,7 +15,14 @@ const formKey = ref(0);
 const loading = ref(false);
 
 const toast = useToast();
-
+const {
+  turnstile,
+  turnstileToken,
+  turnstileError,
+  onTurnstileError,
+  onTurnstileExpired,
+  resetTurnstile,
+} = useTurnstile();
 const {
   shortlink,
   renderQRCode,
@@ -65,6 +73,18 @@ const onSubmit = async (event: FormSubmitEvent) => {
     });
     return;
   }
+  if (!turnstileToken.value) {
+    turnstileError.value = "Please complete the verification.";
+    toast.add({
+      severity: "error",
+      summary: "Verification",
+      detail: "Please complete the verification.",
+      life: 3000,
+    });
+    return;
+  }
+
+  turnstileError.value = undefined;
 
   try {
     loading.value = true;
@@ -99,9 +119,11 @@ const onSubmit = async (event: FormSubmitEvent) => {
       life: 3000,
     });
   } finally {
+    resetTurnstile();
     loading.value = false;
   }
 };
+
 </script>
 
 <template>
@@ -136,23 +158,44 @@ const onSubmit = async (event: FormSubmitEvent) => {
       @submit="onSubmit"
       class="create-form"
     >
-    <div class="card__title">
-      <h1>Create Link</h1>
-    </div>
+      <div class="card__title">
+        <h1>Create Link</h1>
+      </div>
 
-      <div class="create-form__group">
-        <FloatLabel variant="on">
-          <InputText id="target" name="target" fluid :disabled="loading" />
+
+      <div class="create-form__layout">
+        <div class="create-form__group">
           <label for="target">Target URL</label>
-        </FloatLabel>
-        <Message
-          v-for="error in $form.target?.errors"
-          severity="error"
-          variant="simple"
-          size="small"
-        >
-          {{ error.message }}
-        </Message>
+          <InputText id="target" name="target" fluid :disabled="loading" />
+          <Message
+            v-for="error in $form.target?.errors"
+            severity="error"
+            variant="simple"
+            size="small"
+          >
+            {{ error.message }}
+          </Message>
+        </div>
+
+        <div class="create-form__group">
+          <label for="verification">Verification</label>
+          <div class="p-inputtext p-component p-filled p-inputtext-fluid class captcha-box">
+            <NuxtTurnstile
+              ref="turnstile"
+              v-model="turnstileToken"
+              @error="onTurnstileError"
+              @expired="onTurnstileExpired"
+            />
+          </div>
+          <Message
+            v-if="turnstileError"
+            severity="error"
+            variant="simple"
+            size="small"
+          >
+            {{ turnstileError }}
+          </Message>
+        </div>
       </div>
       
       <Button
@@ -243,6 +286,16 @@ const onSubmit = async (event: FormSubmitEvent) => {
   justify-content: space-between;
   gap: 0.75rem;
   height: 100%;
+
+  &__group {
+    margin-bottom: 1.25rem;
+  }
+}
+
+.captcha-box {
+  display: flex;
+  justify-content: center;
+  min-height: 2.3125rem;
 }
 
 .result {
