@@ -70,6 +70,17 @@ For production, change the redirect URI:
 GOOGLE_REDIRECT_URI=http://<YOUR.PRODUCTION.DOMAIN>/api/auth/google/callback
 ```
 
+### Cloudflare Captcha
+
+Get the Turnstile site key and secret key from the [Cloudflare Dashboard](cloudflare-dash) and put them into the `.env`:
+
+```bash
+TURNSTILE_SITE_KEY=your-site-key
+TURNSTILE_SECRET_KEY=your-secret-key
+```
+
+[cloudflare-dash]: https://dash.cloudflare.com/
+
 ### Miscellaneous
 
 For production, change the base URL to your production base URL:
