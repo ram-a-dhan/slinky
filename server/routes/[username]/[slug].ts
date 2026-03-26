@@ -2,6 +2,8 @@ import { and, eq } from "drizzle-orm";
 import { links as linkSchema, users as userSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
+  setHeader(event, "X-Robots-Tag", "noindex, nofollow");
+
   const username = getRouterParams(event)?.username;
   const slug = getRouterParams(event)?.slug;
 

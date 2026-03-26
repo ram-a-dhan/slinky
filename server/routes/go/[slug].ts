@@ -2,6 +2,8 @@ import { and, eq, isNull } from "drizzle-orm";
 import { links as linkSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
+  setHeader(event, "X-Robots-Tag", "noindex, nofollow");
+
   const slug = getRouterParams(event)?.slug;
 
   if (!slug) throw createError({
