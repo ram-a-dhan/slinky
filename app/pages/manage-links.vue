@@ -1,6 +1,8 @@
 <script setup lang="ts">
 definePageMeta({ middleware: "auth", layout: "shell" });
 
+useHead({ titleTemplate: (title) => `Manage Links | ${title}` });
+
 const auth = useAuthStore();
 
 const isShowLinkShare = ref(false);
