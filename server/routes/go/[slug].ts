@@ -1,5 +1,6 @@
 import { and, eq, isNull } from "drizzle-orm";
 import { links as linkSchema } from "#server/database/schema";
+import { access } from "#server/utils/access";
 
 export default defineEventHandler(async (event) => {
   setHeader(event, "X-Robots-Tag", "noindex, nofollow");
@@ -28,10 +29,11 @@ export default defineEventHandler(async (event) => {
   });
 
   // Log access time for link.
-  await $fetch(
-    `/api/links/${result?.[0]?.id}/access`,
-    { method: HTTP_METHOD.POST },
-  ).catch(() => null);
+  await access(
+    db,
+    linkSchema,
+    eq(linkSchema.id, result[0].id),
+  );
 
   return sendRedirect(
     event,

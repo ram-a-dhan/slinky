@@ -1,5 +1,6 @@
 import { and, eq } from "drizzle-orm";
 import { links as linkSchema, users as userSchema } from "#server/database/schema";
+import { access } from "#server/utils/access";
 
 export default defineEventHandler(async (event) => {
   setHeader(event, "X-Robots-Tag", "noindex, nofollow");
@@ -29,17 +30,19 @@ export default defineEventHandler(async (event) => {
     statusMessage: "Link not found."
   });
 
-  // Log access time for link.
-  await $fetch(
-    `/api/links/${result?.[0]?.links?.id}/access`,
-    { method: HTTP_METHOD.POST },
-  ).catch(() => null);
-
-  // Log access time for user.
-  await $fetch(
-    `/api/users/${result?.[0]?.users?.id}/access`,
-    { method: HTTP_METHOD.POST },
-  ).catch(() => null);
+  // Log access time for link and user.
+  await db.transaction(async (tx) => {
+    await access(
+      tx,
+      linkSchema,
+      eq(linkSchema.id, result[0]?.links.id!),
+    );
+    await access(
+      tx,
+      userSchema,
+      eq(userSchema.id, result[0]?.users.id!),
+    );
+  });
 
   return sendRedirect(
     event,
