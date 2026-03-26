@@ -1,5 +1,5 @@
 import { useDb } from "../utils/db";
-import { users, links } from "./schema";
+import { users, links, qrOptions } from "./schema";
 
 const clear = async () => {
   const db = useDb();
@@ -8,6 +8,7 @@ const clear = async () => {
     console.log("🧹 Clearing database...");
     await db.transaction(async (tx) => {
       await tx.delete(links);
+      await tx.delete(qrOptions);
       await tx.delete(users);
     });
     console.log("✅ Database cleared!");

@@ -1,6 +1,6 @@
 import { sql } from "drizzle-orm";
 import { useDb } from "../utils/db";
-import { users, links } from "./schema";
+import { users, links, qrOptions } from "./schema";
 
 const destroy = async () => {
   const db = useDb();
@@ -9,6 +9,7 @@ const destroy = async () => {
     console.log("💥 Destroying database...");
     await db.transaction(async (tx) => {
       await tx.run(sql`DROP TABLE IF EXISTS ${links};`);
+      await tx.run(sql`DROP TABLE IF EXISTS ${qrOptions};`);
       await tx.run(sql`DROP TABLE IF EXISTS ${users};`);
     });
     console.log("✅ Database destroyed!");

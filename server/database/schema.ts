@@ -4,8 +4,20 @@ export const users = sqliteTable("users", {
   id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
   email: text("email").notNull().unique(),
   username: text("username").notNull().unique(),
+  hitCount: integer("hit_count").notNull().default(0),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
   lastAccessedAt: integer('last_accessed_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
+});
+
+export const qrOptions = sqliteTable("qr_options", {
+  id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
+  style: text("style"),
+  color1: text("color1"),
+  color2: text("color2"),
+  gradientType: text("gradient_type"),
+  gradientAngle: integer("gradient_angle"),
+  image_url: text("image_url"),
+  userId: text("user_id").notNull().unique().references(() => users.id),
 });
 
 export const links = sqliteTable("links", {
@@ -13,6 +25,7 @@ export const links = sqliteTable("links", {
   slug: text("slug").notNull().unique(),
   target: text("target").notNull(),
   userId: text("user_id").references(() => users.id),
+  hitCount: integer("hit_count").notNull().default(0),
   createdAt: integer('created_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
   lastAccessedAt: integer('last_accessed_at', { mode: 'timestamp' }).notNull().$defaultFn(() => new Date()),
 });
