@@ -8,6 +8,13 @@
       "when": 1772508692398,
       "tag": "0000_giant_christian_walker",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1774488847850,
+      "tag": "0001_good_umar",
+      "breakpoints": true
     }
   ]
 }
