@@ -6,6 +6,7 @@ export interface IQrCodeOptions {
   color1?: string;
   color2?: string;
   gradientType?: GradientType;
+  gradientAngle?: number;
   style?: IQrStyles;
 }
 
@@ -28,6 +29,7 @@ export const qrCodeOptions = ({
   color1 = "#000000",
   color2 = "#000000",
   gradientType = "linear",
+  gradientAngle = 0,
   style = "rounded",
 }: IQrCodeOptions = {}): Options => {
   const styleOptions: IStyle = {
