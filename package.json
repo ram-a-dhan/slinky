@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@libsql/client": "^0.17.0",
+    "@nuxtjs/seo": "^4.0.2",
     "@nuxtjs/turnstile": "^1.1.2",
     "@pinia/nuxt": "^0.11.3",
     "@primeuix/themes": "^2.0.3",
@@ -26,7 +27,9 @@
     "jsonwebtoken": "^9.0.3",
     "nanoid": "^5.1.6",
     "nuxt": "^4.3.1",
+    "nuxt-schema-org": "^6.0.0",
     "pinia": "^3.0.4",
+    "playwright-core": "^1.58.2",
     "primeicons": "^7.0.0",
     "primevue": "^4.5.4",
     "qr-code-styling": "^1.9.2",

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 definePageMeta({ middleware: "auth", layout: "shell" });
 
+useHead({ titleTemplate: (title) => `Dashboard | ${title}` });
+
 const auth = useAuthStore();
 const confirm = useConfirm();
 

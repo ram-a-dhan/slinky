@@ -1,17 +1,29 @@
 import Aura from "@primeuix/themes/aura";
 
 export default defineNuxtConfig({
-  app: {
-    head: {
-      title: "Slinky - URL Shortener",
-      link: [
-        {
-          rel: 'icon',
-          type: 'image/svg+xml',
-          href: '/favicon.svg',
-        },
-      ],
-    },
+  site: {
+    url: process.env.BASE_URL,
+    name: "Fast & Free URL Shortener",
+    description: "Shorten long URLs in one click, generate QR codes, with style!",
+    defaultLocale: "en",
+  },
+  sitemap: {
+    exclude: [
+      "/dashboard/**",
+      "/manage-links/**",
+      "/api/**",
+    ],
+  },
+  robots: {
+    allow: ["/"],
+    disallow: [
+      "/dashboard",
+      "/manage-links",
+      "/api",
+    ],
+  },
+  routeRules: {
+    "/": { prerender: true },
   },
   compatibilityDate: "2025-07-15",
   css: [
@@ -28,6 +40,8 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@primevue/nuxt-module",
     "@nuxtjs/turnstile",
+    "@nuxtjs/seo",
+    "nuxt-schema-org",
   ],
   primevue: {
     autoImport: true,
