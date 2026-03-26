@@ -29,10 +29,12 @@ export default defineEventHandler(async (event) => {
   });
 
   // Log access time for user.
-  await $fetch(
-    `/api/users/${users[0]?.id}/access`,
-    { method: HTTP_METHOD.POST },
-  ).catch(() => null);
+  await access(
+    db,
+    userSchema,
+    eq(userSchema.id, users[0]?.id!),
+    { count: false },
+  );
 
   return users[0];
 });
