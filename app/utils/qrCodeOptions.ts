@@ -67,7 +67,7 @@ export const qrCodeOptions = ({
       roundSize: true,
       gradient: {
         type: gradientType,
-        rotation: 0,
+        rotation: gradientAngle,
         colorStops: [
           {
             offset: 0,
