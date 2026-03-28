@@ -15,3 +15,14 @@ export interface ILink {
   createdAt: Date;
   lastAccessedAt: Date;
 }
+
+export interface IQrOptions {
+  id: string;
+  style: "rounded" | "circles" | "diamond";
+  color1: string;
+  color2: string;
+  gradientType: "linear" | "radial";
+  gradientAngle: number;
+  imageUrl: string;
+  userId: string;
+}
