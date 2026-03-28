@@ -4,6 +4,7 @@ export const useAuthStore = defineStore("auth", () => {
   const user = ref<IUser | null>(null);
   const isLoading = ref<boolean>(false);
   const isLoggedIn = computed(() => user.value !== null);
+  const qr = useQrStore();
 
   const fetchUser = async () => {
     try {
@@ -29,6 +30,7 @@ export const useAuthStore = defineStore("auth", () => {
     );
 
     if (logout.success) {
+      qr.clearQrOptions();
       user.value = null;
       await navigateTo("/");
     }
