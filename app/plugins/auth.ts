@@ -1,6 +1,10 @@
-import { useAuthStore } from "~/stores/auth";
-
 export default defineNuxtPlugin(async () => {
-  const { fetchUser } = useAuthStore();
-  await fetchUser();
+  const auth = useAuthStore();
+  const qr = useQrStore();
+
+  await auth.fetchUser();
+
+  if (auth.user?.id) {
+    await qr.fetchQrOptions(auth.user.id);
+  }
 });
