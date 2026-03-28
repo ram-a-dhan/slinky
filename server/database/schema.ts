@@ -16,7 +16,7 @@ export const qrOptions = sqliteTable("qr_options", {
   color2: text("color2"),
   gradientType: text("gradient_type"),
   gradientAngle: integer("gradient_angle"),
-  image_url: text("image_url"),
+  imageUrl: text("image_url"),
   userId: text("user_id").notNull().unique().references(() => users.id),
 });
 
