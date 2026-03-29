@@ -3,6 +3,8 @@ import { users as userSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
+    requireAuth(event, { isAdminOnly: true });
+
     const email: string | undefined = (await readBody(event))?.email;
 
     if (!email) throw createError({

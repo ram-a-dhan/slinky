@@ -1,8 +1,11 @@
 import { eq } from "drizzle-orm";
 import { users as userSchema, links as linkSchema } from "#server/database/schema";
+import { verifyUser } from "#server/utils/auth";
 
 export default defineEventHandler(async (event) => {
   try {
+    const payload = requireAuth(event);
+
     const id = getRouterParams(event)?.id;
 
     if (!id) throw createError({
@@ -10,21 +13,9 @@ export default defineEventHandler(async (event) => {
       statusMessage: "User ID required.",
     });
 
+    verifyUser(payload, id);
+
     // Revoke Google account access.
-    const token = getCookie(event, "auth_token");
-
-    if (!token) throw createError({
-      statusCode: HTTP_STATUS.NOT_AUTHENTICATED,
-      statusMessage: "Not authenticated. Please sign in again.",
-    });
-
-    const payload = verifyJwt(token);
-
-    if (!payload) throw createError({
-      statusCode: HTTP_STATUS.NOT_AUTHENTICATED,
-      statusMessage: "Token invalid. Please sign in again.",
-    });
-
     if (payload.googleAccessToken) {
       await $fetch(
         `https://oauth2.googleapis.com/revoke?token=${payload.googleAccessToken}`,

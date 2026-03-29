@@ -1,24 +1,34 @@
 import { eq } from "drizzle-orm";
 import { qrOptions as qrOptionSchema } from "#server/database/schema";
+import { verifyUser } from "~~/server/utils/auth";
 
 export default defineEventHandler(async (event) => {
-  const userId = getRouterParams(event)?.id;
+  try {
+    const payload = requireAuth(event);
 
-  if (!userId) throw createError({
-    statusCode: HTTP_STATUS.BAD_REQUEST,
-    statusMessage: "User ID required.",
-  });
+    const userId = getRouterParams(event)?.id;
+  
+    if (!userId) throw createError({
+      statusCode: HTTP_STATUS.BAD_REQUEST,
+      statusMessage: "User ID required.",
+    });
 
-  const db = useDb();
+    verifyUser(payload, userId);
 
-  const qrOptions = await db
-    .select()
-    .from(qrOptionSchema)
-    .where(eq(qrOptionSchema.userId, userId));
-
-  return {
-    statusCode: HTTP_STATUS.CREATED,
-    statusMessage: "QR Options fetched.",
-    data: qrOptions[0],
-  };
+    const db = useDb();
+  
+    const qrOptions = await db
+      .select()
+      .from(qrOptionSchema)
+      .where(eq(qrOptionSchema.userId, userId));
+  
+    return {
+      statusCode: HTTP_STATUS.CREATED,
+      statusMessage: "QR Options fetched.",
+      data: qrOptions[0],
+    };
+    
+  } catch (error) {
+    return error;
+  }
 });

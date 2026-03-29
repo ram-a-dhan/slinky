@@ -1,10 +1,15 @@
 import { and, count, eq, like, isNull, or } from "drizzle-orm";
 import { links as linkSchema } from "#server/database/schema";
+import { verifyUser } from "#server/utils/auth";
 
 export default defineEventHandler(async (event) => {
   try {
+    const payload = requireAuth(event);
+
     const { search = undefined, userId = undefined }: IParamsLink = getQuery(event);
   
+    if (userId) verifyUser(payload, userId);
+
     if (search && search.trim().length < 4) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Search query must be at least 4 characters long."
