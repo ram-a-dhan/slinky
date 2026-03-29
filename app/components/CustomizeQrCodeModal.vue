@@ -63,6 +63,12 @@ const onSubmit = async (event: FormSubmitEvent) => {
     if (response.statusCode === HTTP_STATUS.CREATED) {
       qr.fetchQrOptions(auth.user?.id!);
       clearFile();
+      toast.add({
+        severity: "success",
+        summary: "Success",
+        detail: response.statusMessage,
+        life: 3000,
+      });
       visible.value = false;
     }
   } catch (error) {
