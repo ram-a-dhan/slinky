@@ -3,6 +3,8 @@ import { users as userSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
+    requireAuth(event, { isAdminOnly: true });
+
     const { search = undefined }: IParams<IUser> = getQuery(event);
   
     if (search && search.trim().length < 4) throw createError({

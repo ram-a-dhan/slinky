@@ -3,6 +3,8 @@ import { users as userSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
+    requireAuth(event, { isAdminOnly: true });
+
     const id = getRouterParams(event)?.id;
 
     if (!id) throw createError({
