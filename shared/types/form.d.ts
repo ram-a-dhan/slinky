@@ -7,3 +7,10 @@ export interface IFormResolverReturn<T extends object> {
 }
 
 export type IFormResolver<T extends object> = ({ values }: FormResolverOptions) => IFormResolverReturn<T>;
+
+export interface IFormSlot {
+  register: (field: string, options: any) => any;
+  reset: () => void;
+  valid: boolean;
+  [key: string]: FormFieldState;
+}
