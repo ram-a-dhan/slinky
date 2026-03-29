@@ -33,3 +33,38 @@ body {
   color: var(--p-toolbar-color);
   border-radius: var(--p-toolbar-border-radius);
 }
+
+.qrcode-preview {
+  width: 100%;
+  aspect-ratio: 1;
+
+  > canvas {
+    width: 100% !important;
+    aspect-ratio: 1 !important;
+    border-radius: var(--p-button-border-radius);
+    overflow: hidden;
+  }
+}
+
+.p-fileupload.p-fileupload-basic.p-component {
+  > .p-fileupload-basic-content {
+    > .p-button.p-component.p-fileupload-choose-button {
+      background: var(--p-button-contrast-background);
+      color: var(--p-button-contrast-color);
+
+      :not(:disabled):hover {
+        background: var(--p-button-contrast-hover-background);
+        color: var(--p-button-contrast-hover-color);
+      }
+
+      :not(:disabled):active {
+        background: var(--p-button-contrast-active-background);
+        color: var(--p-button-contrast-active-color);
+      }
+
+      :disabled {
+        opacity: var(--p-disabled-opacity);
+      }
+    }
+  }
+}

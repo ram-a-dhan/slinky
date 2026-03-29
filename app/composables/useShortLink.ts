@@ -1,4 +1,5 @@
 import QRCodeStyling from "qr-code-styling";
+import type { IQrOptions } from "~~/shared/types/data";
 
 interface IUseLinkOptions {
   toast: ReturnType<typeof useToast>;
@@ -11,7 +12,7 @@ export const useShortLink = ({ toast, qrRef = "qrBox" }: IUseLinkOptions) => {
   const qrCode = ref<QRCodeStyling | null>(null);
   const url = useRuntimeConfig().public.BASE_URL as string;
 
-  const renderQRCode = async (options: IQrCodeOptions = {}) => {
+  const renderQRCode = async (options: Partial<IQrOptions> = {}) => {    
     if (!shortlink.value || !qrBox.value) return;
 
     await nextTick();

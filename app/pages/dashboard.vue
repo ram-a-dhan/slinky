@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { MenuItem } from "primevue/menuitem";
+
 definePageMeta({ middleware: "auth", layout: "shell" });
 
 useHead({ titleTemplate: (title) => `Dashboard | ${title}` });
@@ -7,10 +9,21 @@ const auth = useAuthStore();
 const confirm = useConfirm();
 
 const popoverRef = ref();
+const isShowCustomizeQrCode = ref(false);
 const isShowChangeUsername = ref(false);
 const isShowDeleteAccount = ref(false);
-const userSettings = ref(
+const userSettings = ref<MenuItem[]>(
   [
+    {
+      label: "Link Settings",
+      items: [
+        {
+          label: "Customize QR Code",
+          icon: "pi pi-qrcode",
+          action: () => isShowCustomizeQrCode.value = true,
+        },
+      ],
+    },
     {
       label: "Account Settings",
       items: [
@@ -78,6 +91,7 @@ const toggleUserSettings = (event: any) => {
   </template>
 </Toolbar>
 
+<CustomizeQrCodeModal v-model:visible="isShowCustomizeQrCode" />
 <ChangeUsernameModal v-model:visible="isShowChangeUsername" />
 <DeleteAccountModal v-model:visible="isShowDeleteAccount" />
 </template>
