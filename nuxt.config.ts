@@ -1,4 +1,4 @@
-import Aura from "@primeuix/themes/aura";
+import { Preset } from "./primevue.config";
 
 export default defineNuxtConfig({
   site: {
@@ -48,7 +48,7 @@ export default defineNuxtConfig({
     options: {
       ripple: true,
       theme: {
-        preset: Aura,
+        preset: Preset,
         options: {
           darkModeSelector: "system",
           cssLayer: false,
