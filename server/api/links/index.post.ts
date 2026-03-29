@@ -1,13 +1,15 @@
 import { nanoid } from "nanoid";
 import { eq } from "drizzle-orm";
 import { users as userSchema, links as linkSchema } from "#server/database/schema";
+import { verifyUser } from "#server/utils/auth";
 
 export default defineEventHandler(async (event) => {
   try {
-    const body: { slug?: string; target?: string, userId?: string } = await readBody(event);
+    const payload = requireAuth(event);
 
-    // Allow either both slug and userId are present or both absent.
-    if (!body?.slug && body?.userId || body?.slug && !body?.userId) {
+    const body: ILink = await readBody(event);
+
+    if (!body?.slug) {
         throw createError({
         statusCode: HTTP_STATUS.BAD_REQUEST,
         statusMessage: "Link slug required.",
@@ -18,6 +20,13 @@ export default defineEventHandler(async (event) => {
       statusCode: HTTP_STATUS.BAD_REQUEST,
       statusMessage: "Link target required.",
     });
+
+    if (!body?.userId) throw createError({
+      statusCode: HTTP_STATUS.BAD_REQUEST,
+      statusMessage: "User ID required.",
+    });
+
+    verifyUser(payload, body.userId);
 
     if (body?.slug && !REGEX.LINK_SLUG.test(body.slug))
       throw createError({
@@ -33,30 +42,26 @@ export default defineEventHandler(async (event) => {
 
     const db = useDb();
 
-    if (body?.slug) {
-      const links = await db
-        .select()
-        .from(linkSchema)
-        .where(eq(linkSchema.slug, body.slug))
-        .limit(1);
+    const links = await db
+      .select()
+      .from(linkSchema)
+      .where(eq(linkSchema.slug, body.slug))
+      .limit(1);
 
-      if (links.length) throw createError({
-        statusCode: HTTP_STATUS.CONFLICT,
-        statusMessage: "Link slug already exists.",
-      });
-    }
+    if (links.length) throw createError({
+      statusCode: HTTP_STATUS.CONFLICT,
+      statusMessage: "Link slug already exists.",
+    });
 
-    if (body?.userId) {
-      const users = await db
-        .select()
-        .from(userSchema)
-        .where(eq(userSchema.id, body.userId));
+    const users = await db
+      .select()
+      .from(userSchema)
+      .where(eq(userSchema.id, body.userId));
 
-      if (!users.length) throw createError({
-        statusCode: HTTP_STATUS.NOT_FOUND,
-        statusMessage: "User not found.",
-      });
-    }
+    if (!users.length) throw createError({
+      statusCode: HTTP_STATUS.NOT_FOUND,
+      statusMessage: "User not found.",
+    });
 
     const newLinks = await db
       .insert(linkSchema)

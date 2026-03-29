@@ -3,6 +3,8 @@ import { links as linkSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
+    requireAuth(event);
+
     const id = getRouterParams(event)?.id;
 
     if (!id) throw createError({

@@ -9,11 +9,11 @@ interface IAccessOptions {
   time?: boolean;
 }
 
-export const access = async (dbtx: DbOrTx, schema: SQLiteTable, whereClause: SQL, options?: IAccessOptions) => {
+export const access = async (dbtx: DbOrTx, schema: SQLiteTable, whereClause: SQL, accessOptions?: IAccessOptions) => {
   const {
     count = true,
     time = true,
-  } = options || {};
+  } = accessOptions || {};
 
   return await dbtx
     .update(schema)

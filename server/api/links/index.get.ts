@@ -1,9 +1,12 @@
 import { and, asc, desc, eq, isNull, like, or } from "drizzle-orm";
 import { links as linkSchema } from "#server/database/schema";
 import { IParamsLink } from "~~/shared/types/fetch";
+import { verifyUser } from "#server/utils/auth";
 
 export default defineEventHandler(async (event) => {
   try {
+    const payload = requireAuth(event);
+
     let {
       page = 1,
       size = 10,
@@ -17,6 +20,8 @@ export default defineEventHandler(async (event) => {
     size = Number(size);
     const offset = (page - 1) * size;
     const orderBy = order === "asc" ? asc : desc;
+
+    if (userId) verifyUser(payload, userId);
 
     if (search && search.trim().length < 4) throw createError({
       statusCode: HTTP_STATUS.BAD_REQUEST,

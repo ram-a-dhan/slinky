@@ -90,7 +90,7 @@ const onSubmit = async (event: FormSubmitEvent) => {
     loading.value = true;
 
     const response = await $fetch<IRes<ILink>>(
-      "/api/links",
+      "/api/links/try",
       {
         method: HTTP_METHOD.POST,
         body: { target: event.states.target?.value },
