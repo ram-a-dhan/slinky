@@ -216,7 +216,7 @@ const onSubmit = async (event: FormSubmitEvent) => {
       <h1>Result</h1>
     </div>
 
-    <div class="result__qr-code" ref="qrBox" />
+    <div class="qrcode-preview" ref="qrBox" />
     
     <InputGroup>
       <Button
@@ -296,21 +296,5 @@ const onSubmit = async (event: FormSubmitEvent) => {
   display: flex;
   justify-content: center;
   min-height: 2.3125rem;
-}
-
-.result {
-  &__qr-code {
-    width: 100%;
-    aspect-ratio: 1;
-    background-color: grey;
-    border-radius: var(--p-button-border-radius);
-
-    // Force the rendered svg/canvas to scale with the container.
-    :deep(svg),
-    :deep(canvas) {
-      width: 100% !important;
-      height: 100% !important;
-    }
-  }
 }
 </style>

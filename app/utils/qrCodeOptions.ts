@@ -1,16 +1,6 @@
 import slinky from "~/assets/images/slinky.png";
 import type { CornerDotType, CornerSquareType, DotType, GradientType, Options } from "qr-code-styling";
-
-export interface IQrCodeOptions {
-  image?: string;
-  color1?: string;
-  color2?: string;
-  gradientType?: GradientType;
-  gradientAngle?: number;
-  style?: IQrStyles;
-}
-
-export type IQrStyles = keyof IStyle;
+import type { IQrOptions } from "~~/shared/types/data";
 
 interface IStyle {
   rounded: IStyleConfig;
@@ -25,13 +15,13 @@ interface IStyleConfig {
 }
 
 export const qrCodeOptions = ({
-  image = slinky,
+  style = "rounded",
   color1 = "#000000",
   color2 = "#000000",
   gradientType = "linear",
   gradientAngle = 0,
-  style = "rounded",
-}: IQrCodeOptions = {}): Options => {
+  imageUrl = slinky,
+}: Partial<IQrOptions> = {}): Options => {
   const styleOptions: IStyle = {
     rounded: {
       dots: "extra-rounded",
@@ -55,7 +45,7 @@ export const qrCodeOptions = ({
     shape: "square",
     width: 800,
     height: 800,
-    image,
+    image: imageUrl || slinky,
     imageOptions: {
       saveAsBlob: true,
       hideBackgroundDots: true,
@@ -71,11 +61,11 @@ export const qrCodeOptions = ({
         colorStops: [
           {
             offset: 0,
-            color: color1,
+            color: color1.startsWith("#") ? color1 : `#${color1}`,
           },
           {
             offset: 1,
-            color: color2,
+            color: color2.startsWith("#") ? color2 : `#${color2}`,
           },
         ],
       },

@@ -11,6 +11,7 @@ const props = defineProps<IProps>();
 const loading = ref(false);
 
 const auth = useAuthStore();
+const qr = useQrStore();
 const toast = useToast();
 
 const {
@@ -31,7 +32,7 @@ watch(visible, async (val) => {
       slug: response?.data.slug!,
       username: auth.user?.username!,
     })
-    await renderQRCode();
+    await renderQRCode(qr.qrOptions);
   }
 });
 
@@ -64,7 +65,7 @@ const fetchDetail = async (id: string) => {
   modal
 >
   <div class="link-share">
-    <div class="link-share__qr-code" ref="qrBox" />
+    <div class="qrcode-preview" ref="qrBox" />
 
     <Button
       severity="contrast"
@@ -99,18 +100,5 @@ const fetchDetail = async (id: string) => {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-
-  &__qr-code {
-    width: 100%;
-    aspect-ratio: 1;
-    background-color: grey;
-
-    // Force the rendered svg/canvas to scale with the container.
-    :deep(svg),
-    :deep(canvas) {
-      width: 100% !important;
-      height: 100% !important;
-    }
-  }
 }
 </style>
