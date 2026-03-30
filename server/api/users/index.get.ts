@@ -1,5 +1,6 @@
 import { asc, desc, like, or } from "drizzle-orm";
 import { users as userSchema } from "#server/database/schema";
+import { countUsers } from "#server/utils/count";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -41,11 +42,8 @@ export default defineEventHandler(async (event) => {
 
     let total = 0;
     if (page === 1) {
-      const userCount = await $fetch<IRes<{ count: number }>>(
-        "/api/users/count",
-        { query: { search } },
-      );
-      total = userCount.data.count;
+      const userCount = await countUsers(search);
+      total = userCount?.[0]?.count || 0;
     }
 
     return {

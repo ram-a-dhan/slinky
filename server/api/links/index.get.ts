@@ -1,7 +1,8 @@
 import { and, asc, desc, eq, isNull, like, or } from "drizzle-orm";
 import { links as linkSchema } from "#server/database/schema";
-import { IParamsLink } from "~~/shared/types/fetch";
+import { IParamsLink } from "#shared/types/fetch";
 import { verifyUser } from "#server/utils/auth";
+import { countLinks } from "#server/utils/count";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -56,16 +57,8 @@ export default defineEventHandler(async (event) => {
 
     let total = 0;
     if (page === 1) {      
-      const linkCount = await $fetch<IRes<{ count: number }>>(
-        "/api/links/count",
-        {
-          query: {
-            search,
-            userId,
-          },
-        },
-      );
-      total = linkCount.data.count;
+      const linkCount = await countLinks(search, userId);
+      total = linkCount?.[0]?.count || 0;
     }
 
     return {
