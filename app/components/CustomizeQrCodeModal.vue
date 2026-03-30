@@ -53,11 +53,21 @@ const onSubmit = async (event: FormSubmitEvent) => {
   try {
     loading.value = true;
 
+    const body = new FormData();
+    body.append("style", options.style);
+    body.append("color1", options.color1);
+    body.append("color2", options.color2);
+    body.append("gradientType", options.gradientType);
+    body.append("gradientAngle", options.gradientAngle);
+    if (fileUploadFile.value) {
+      body.append("image", fileUploadFile.value);
+    }
+
     const response = await $fetch<IRes<IQrOptions>>(
       `/api/users/${auth.user?.id!}/qr-options`,
       {
         method: HTTP_METHOD.POST,
-        body: options,
+        body,
       },
     )
     if (response.statusCode === HTTP_STATUS.CREATED) {
@@ -99,7 +109,10 @@ const onChange = async () => {
     options.imageUrl = fileUploadPreview.value;
   }
 
-  await renderQRCode(options);
+  await renderQRCode({
+    ...qr.qrOptions,
+    ...options,
+  });
 };
 
 const debouncedOnChange = useDebounce(onChange, 2000);
@@ -138,6 +151,7 @@ const debouncedOnChange = useDebounce(onChange, 2000);
             optionLabel="label"
             fluid
             @change="onChange"
+            :disabled="loading"
           />
         </Fieldset>
 
@@ -151,6 +165,7 @@ const debouncedOnChange = useDebounce(onChange, 2000);
                 format="hex"
                 :defaultColor="initialValues.color1"
                 @change="debouncedOnChange"
+                :disabled="loading"
               />
               <label for="color1">
                 #{{ $form.color1?.value }}
@@ -163,6 +178,7 @@ const debouncedOnChange = useDebounce(onChange, 2000);
                 format="hex"
                 :defaultColor="initialValues.color2"
                 @change="debouncedOnChange"
+                :disabled="loading"
               />
               <label for="color2">
                 #{{ $form.color2?.value }}
@@ -185,6 +201,7 @@ const debouncedOnChange = useDebounce(onChange, 2000);
                   name="gradientType"
                   :value="gradType.value"
                   @change="onChange"
+                  :disabled="loading"
                 />
                 <label :for="gradType.value">
                   {{ gradType.label }}
@@ -197,7 +214,7 @@ const debouncedOnChange = useDebounce(onChange, 2000);
                 :min="0"
                 :max="360"
                 class="gradient-angle"
-                :disabled="$form.gradientType?.value !== 'linear'"
+                :disabled="$form.gradientType?.value !== 'linear' || loading"
                 @slideend="onChange"
               />
               <div
@@ -224,6 +241,7 @@ const debouncedOnChange = useDebounce(onChange, 2000);
               :maxFileSize="102400"
               @select="onFileSelect"
               @change="onChange"
+              :disabled="loading"
             />
             <Button
               v-if="fileUploadFile"
@@ -232,6 +250,7 @@ const debouncedOnChange = useDebounce(onChange, 2000);
               v-tooltip.top="{ value: 'Remove Image' }"
               style="flex-shrink: 0;"
               @click="() => onFileDelete()"
+              :disabled="loading"
             />
           </div>
         </Fieldset>
@@ -243,12 +262,14 @@ const debouncedOnChange = useDebounce(onChange, 2000);
               label="cancel"
               fluid
               @click="visible = false"
+              :disabled="loading"
             />
             <Button
               type="submit"
               severity="contrast"
               label="Save"
               fluid
+              :loading="loading"
             />
         </div>
       </Form>
