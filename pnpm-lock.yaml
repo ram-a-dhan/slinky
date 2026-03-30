@@ -13,10 +13,10 @@ importers:
         version: 0.17.0
       '@nuxtjs/seo':
         specifier: ^4.0.2
-        version: 4.0.2(d87cf758aef72bc32775ed0df77f4a8d)
+        version: 4.0.2(11018290a936c737390cf6f4a849bd0a)
       '@nuxtjs/turnstile':
         specifier: ^1.1.2
-        version: 1.1.2(@nuxt/scripts@0.13.2(@unhead/vue@2.1.12(vue@3.5.29(typescript@5.9.3)))(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3)))(magicast@0.5.2)
+        version: 1.1.2(@nuxt/scripts@0.13.2(@unhead/vue@2.1.12(vue@3.5.29(typescript@5.9.3)))(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3)))(magicast@0.5.2)
       '@pinia/nuxt':
         specifier: ^0.11.3
         version: 0.11.3(magicast@0.5.2)(pinia@3.0.4(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3)))
@@ -26,6 +26,9 @@ importers:
       '@primevue/forms':
         specifier: ^4.5.4
         version: 4.5.4(vue@3.5.29(typescript@5.9.3))
+      '@vercel/blob':
+        specifier: ^2.3.2
+        version: 2.3.2
       drizzle-orm:
         specifier: ^0.45.1
         version: 0.45.1(@libsql/client@0.17.0)
@@ -37,10 +40,10 @@ importers:
         version: 5.1.6
       nuxt:
         specifier: ^4.3.1
-        version: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+        version: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
       nuxt-schema-org:
         specifier: ^6.0.0
-        version: 6.0.0(7ef6cbdc2f3cc745b4203c1d29d5155f)
+        version: 6.0.0(680b0c2df712d7e3ddb7c7f0883b823c)
       pinia:
         specifier: ^3.0.4
         version: 3.0.4(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3))
@@ -2422,6 +2425,10 @@ packages:
     peerDependencies:
       vue: '>=3.5.18'
 
+  '@vercel/blob@2.3.2':
+    resolution: {integrity: sha512-FjlTJ5ffGj0RssrU0dJ90Zgr83AdhpIs2y9f3x386w+q9sM0P8m8Ouxsm3fqsjr4IyqTTo7Ioc2PJqxxOKNhjA==}
+    engines: {node: '>=20.0.0'}
+
   '@vercel/nft@1.3.2':
     resolution: {integrity: sha512-HC8venRc4Ya7vNeBsJneKHHMDDWpQie7VaKhAIOst3MKO+DES+Y/SbzSp8mFkD7OzwAE2HhHkeSuSmwS20mz3A==}
     engines: {node: '>=20'}
@@ -2687,6 +2694,9 @@ packages:
   ast-walker-scope@0.8.3:
     resolution: {integrity: sha512-cbdCP0PGOBq0ASG+sjnKIoYkWMKhhz+F/h9pRexUdX2Hd38+WOlBkRKlqkGOSm0YQpcFMQBJeK4WspUAkwsEdg==}
     engines: {node: '>=20.19.0'}
+
+  async-retry@1.3.3:
+    resolution: {integrity: sha512-wfr/jstw9xNi/0teMHrRW7dsz3Lt5ARhYNZ2ewpadnhaIp5mbALhOAP+EAdsC7t4Z6wqsDVv9+W6gm1Dk9mEyw==}
 
   async-sema@3.1.1:
     resolution: {integrity: sha512-tLRNUXati5MFePdAk8dw7Qt7DpxPB60ofAgn8WRhW6a2rcimZnYBP9oxHiv0OHy+Wz7kPMG+t4LGdt31+4EmGg==}
@@ -3638,6 +3648,10 @@ packages:
     resolution: {integrity: sha512-ZMERYes6pDydyuGidse7OsHxtbI7WVeUEozgR/g7rd0xUimYNlvZRE/K2MgZTjWy725IfelLeVcEM97mmtRGXw==}
     engines: {node: '>=8'}
 
+  is-buffer@2.0.5:
+    resolution: {integrity: sha512-i2R6zNFDwgEHJyQUtJEk0XFi1i0dPFn/oqjK3/vPCcDeJvW5NQ83V8QbicfF1SupOaB0h8ntgBC2YiE7dfyctQ==}
+    engines: {node: '>=4'}
+
   is-core-module@2.16.1:
     resolution: {integrity: sha512-UfoeMA6fIJ8wTYFEUjelnaGI67v6+N7qXJEvQuIGa99l4xsCruSYOVSQ0uPANn4dAzm8lkYPaKLrrijLq7x23w==}
     engines: {node: '>= 0.4'}
@@ -3675,6 +3689,9 @@ packages:
 
   is-module@1.0.0:
     resolution: {integrity: sha512-51ypPSPCoTEIN9dy5Oy+h4pShgJmPCygKfyRCISBI+JoWT/2oJvK8QPxmwv7b/p239jXrm9M1mlQbyKJ5A152g==}
+
+  is-node-process@1.2.0:
+    resolution: {integrity: sha512-Vg4o6/fqPxIjtxgUH5QLJhwZ7gW5diGCVlXpuUfELC62CuxM1iHcRe51f2W1FDy04Ai4KJkagKjx3XaqyfRKXw==}
 
   is-number@7.0.0:
     resolution: {integrity: sha512-41Cifkg6e8TylSpdtTpeLVMqvSBEVzTttHvERD741+pnZ8ANv0004MRL43QKPDlK9cGvNp6NZWZUBlbGXYxxng==}
@@ -4761,6 +4778,10 @@ packages:
     engines: {node: '>= 0.4'}
     hasBin: true
 
+  retry@0.13.1:
+    resolution: {integrity: sha512-XQBQ3I8W1Cge0Seh+6gjj03LbmRFWuoszgK9ooCpwYIrhhoO80pfq4cUkU5DkknwfOfFteRwlZ56PYOGYyFWdg==}
+    engines: {node: '>= 4'}
+
   reusify@1.1.0:
     resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
@@ -5048,6 +5069,10 @@ packages:
   text-decoder@1.2.7:
     resolution: {integrity: sha512-vlLytXkeP4xvEq2otHeJfSQIRyWxo/oZGEbXrtEEF9Hnmrdly59sUbzZ/QgyWuLYHctCHxFF4tRQZNQ9k60ExQ==}
 
+  throttleit@2.1.0:
+    resolution: {integrity: sha512-nt6AMGKW1p/70DF/hGBdJB57B8Tspmbp5gfJ8ilhLnt7kkr2ye7hzD6NVG8GGErk2HWF34igrL2CXmNIkzKqKw==}
+    engines: {node: '>=18'}
+
   tiny-inflate@1.0.3:
     resolution: {integrity: sha512-pkY1fj1cKHb2seWDy0B16HeWyczlJA9/WW3u3c4z/NiWDsO3DOU5D7nhTLE9CF0yXv/QZFY7sEJmj24dK+Rrqw==}
 
@@ -5121,6 +5146,10 @@ packages:
 
   undici-types@7.18.2:
     resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
+
+  undici@6.24.1:
+    resolution: {integrity: sha512-sC+b0tB1whOCzbtlx20fx3WgCXwkW627p4EA9uM+/tNNPkSS+eSEld6pAs9nDv7WbY1UUljBMYPtu9BCOrCWKA==}
+    engines: {node: '>=18.17'}
 
   unenv@2.0.0-rc.24:
     resolution: {integrity: sha512-i7qRCmY42zmCwnYlh9H2SvLEypEFGye5iRmEMKjcGi7zk9UquigRjFtTLz0TYqr0ZGLZhaMHl/foy1bZR+Cwlw==}
@@ -6373,13 +6402,13 @@ snapshots:
       - utf-8-validate
       - vue
 
-  '@nuxt/fonts@0.14.0(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
+  '@nuxt/fonts@0.14.0(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       '@nuxt/devtools-kit': 3.2.4(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
       consola: 3.4.2
       defu: 6.1.4
-      fontless: 0.2.1(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+      fontless: 0.2.1(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       h3: 1.15.5
       magic-regexp: 0.10.0
       ofetch: 1.5.1
@@ -6389,7 +6418,7 @@ snapshots:
       ufo: 1.6.3
       unifont: 0.7.4
       unplugin: 3.0.0
-      unstorage: 1.17.4(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
+      unstorage: 1.17.4(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -6510,7 +6539,7 @@ snapshots:
     transitivePeerDependencies:
       - magicast
 
-  '@nuxt/nitro-server@4.3.1(@libsql/client@0.17.0)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(typescript@5.9.3)':
+  '@nuxt/nitro-server@4.3.1(@libsql/client@0.17.0)(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(typescript@5.9.3)':
     dependencies:
       '@nuxt/devalue': 2.0.2
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
@@ -6527,8 +6556,8 @@ snapshots:
       impound: 1.0.0
       klona: 2.0.6
       mocked-exports: 0.1.1
-      nitropack: 2.13.1(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0))
-      nuxt: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+      nitropack: 2.13.1(@libsql/client@0.17.0)(@vercel/blob@2.3.2)(drizzle-orm@0.45.1(@libsql/client@0.17.0))
+      nuxt: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
       ohash: 2.0.11
       pathe: 2.0.3
       pkg-types: 2.3.0
@@ -6536,7 +6565,7 @@ snapshots:
       std-env: 3.10.0
       ufo: 1.6.3
       unctx: 2.5.0
-      unstorage: 1.17.4(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
+      unstorage: 1.17.4(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
       vue: 3.5.29(typescript@5.9.3)
       vue-bundle-renderer: 2.2.0
       vue-devtools-stub: 0.1.0
@@ -6592,7 +6621,7 @@ snapshots:
       pkg-types: 2.3.0
       std-env: 4.0.0
 
-  '@nuxt/scripts@0.13.2(@unhead/vue@2.1.12(vue@3.5.29(typescript@5.9.3)))(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3))':
+  '@nuxt/scripts@0.13.2(@unhead/vue@2.1.12(vue@3.5.29(typescript@5.9.3)))(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3))':
     dependencies:
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
       '@unhead/vue': 2.1.12(vue@3.5.29(typescript@5.9.3))
@@ -6609,7 +6638,7 @@ snapshots:
       std-env: 3.10.0
       ufo: 1.6.3
       unplugin: 2.3.11
-      unstorage: 1.17.4(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
+      unstorage: 1.17.4(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
       valibot: 1.3.1(typescript@5.9.3)
     transitivePeerDependencies:
       - '@azure/app-configuration'
@@ -6644,13 +6673,13 @@ snapshots:
       rc9: 3.0.0
       std-env: 3.10.0
 
-  '@nuxt/ui@4.6.0(@tiptap/extensions@3.20.5(@tiptap/core@3.20.5(@tiptap/pm@3.20.5))(@tiptap/pm@3.20.5))(@tiptap/y-tiptap@3.0.2(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.7)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(embla-carousel@8.6.0)(ioredis@5.10.0)(magicast@0.5.2)(tailwindcss@4.2.2)(typescript@5.9.3)(valibot@1.3.1(typescript@5.9.3))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue-router@4.6.4(vue@3.5.29(typescript@5.9.3)))(vue@3.5.29(typescript@5.9.3))(yjs@13.6.30)':
+  '@nuxt/ui@4.6.0(@tiptap/extensions@3.20.5(@tiptap/core@3.20.5(@tiptap/pm@3.20.5))(@tiptap/pm@3.20.5))(@tiptap/y-tiptap@3.0.2(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.7)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(embla-carousel@8.6.0)(ioredis@5.10.0)(magicast@0.5.2)(tailwindcss@4.2.2)(typescript@5.9.3)(valibot@1.3.1(typescript@5.9.3))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue-router@4.6.4(vue@3.5.29(typescript@5.9.3)))(vue@3.5.29(typescript@5.9.3))(yjs@13.6.30)':
     dependencies:
       '@floating-ui/dom': 1.7.6
       '@iconify/vue': 5.0.0(vue@3.5.29(typescript@5.9.3))
       '@internationalized/date': 3.12.0
       '@internationalized/number': 3.6.5
-      '@nuxt/fonts': 0.14.0(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+      '@nuxt/fonts': 0.14.0(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@nuxt/icon': 2.2.1(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
       '@nuxt/schema': 4.4.2
@@ -6757,7 +6786,7 @@ snapshots:
       - vue
       - yjs
 
-  '@nuxt/vite-builder@4.3.1(@types/node@25.3.3)(lightningcss@1.32.0)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3))(yaml@2.8.2)':
+  '@nuxt/vite-builder@4.3.1(@types/node@25.3.3)(lightningcss@1.32.0)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3))(yaml@2.8.2)':
     dependencies:
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
       '@rollup/plugin-replace': 6.0.3(rollup@4.59.0)
@@ -6776,7 +6805,7 @@ snapshots:
       magic-string: 0.30.21
       mlly: 1.8.0
       mocked-exports: 0.1.1
-      nuxt: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+      nuxt: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
       pathe: 2.0.3
       pkg-types: 2.3.0
       postcss: 8.5.6
@@ -6843,14 +6872,14 @@ snapshots:
       - vite
       - vue
 
-  '@nuxtjs/seo@4.0.2(d87cf758aef72bc32775ed0df77f4a8d)':
+  '@nuxtjs/seo@4.0.2(11018290a936c737390cf6f4a849bd0a)':
     dependencies:
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
       '@nuxtjs/robots': 5.7.1(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
       '@nuxtjs/sitemap': 7.6.0(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
-      nuxt: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
-      nuxt-link-checker: 4.3.9(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
-      nuxt-og-image: 6.2.0(5a4e44d27a4cba84d65ccd373eeb0c2f)
+      nuxt: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+      nuxt-link-checker: 4.3.9(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
+      nuxt-og-image: 6.2.0(7585681b44497df2120745eca68e6de5)
       nuxt-schema-org: 5.0.10(@unhead/vue@2.1.12(vue@3.5.29(typescript@5.9.3)))(magicast@0.5.2)(unhead@2.1.12)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
       nuxt-seo-utils: 7.0.19(magicast@0.5.2)(rollup@4.59.0)(unhead@2.1.12)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
       nuxt-site-config: 3.2.21(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
@@ -6946,10 +6975,10 @@ snapshots:
       - vite
       - vue
 
-  '@nuxtjs/turnstile@1.1.2(@nuxt/scripts@0.13.2(@unhead/vue@2.1.12(vue@3.5.29(typescript@5.9.3)))(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3)))(magicast@0.5.2)':
+  '@nuxtjs/turnstile@1.1.2(@nuxt/scripts@0.13.2(@unhead/vue@2.1.12(vue@3.5.29(typescript@5.9.3)))(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3)))(magicast@0.5.2)':
     dependencies:
       '@nuxt/kit': 3.21.1(magicast@0.5.2)
-      '@nuxt/scripts': 0.13.2(@unhead/vue@2.1.12(vue@3.5.29(typescript@5.9.3)))(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3))
+      '@nuxt/scripts': 0.13.2(@unhead/vue@2.1.12(vue@3.5.29(typescript@5.9.3)))(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3))
       '@types/cloudflare-turnstile': 0.2.2
       defu: 6.1.4
       pathe: 2.0.3
@@ -7960,6 +7989,14 @@ snapshots:
       unhead: 2.1.9
       vue: 3.5.29(typescript@5.9.3)
 
+  '@vercel/blob@2.3.2':
+    dependencies:
+      async-retry: 1.3.3
+      is-buffer: 2.0.5
+      is-node-process: 1.2.0
+      throttleit: 2.1.0
+      undici: 6.24.1
+
   '@vercel/nft@1.3.2(rollup@4.59.0)':
     dependencies:
       '@mapbox/node-pre-gyp': 2.0.3
@@ -8202,13 +8239,13 @@ snapshots:
 
   '@vueuse/metadata@14.2.1': {}
 
-  '@vueuse/nuxt@14.2.1(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))':
+  '@vueuse/nuxt@14.2.1(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))':
     dependencies:
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
       '@vueuse/core': 14.2.1(vue@3.5.29(typescript@5.9.3))
       '@vueuse/metadata': 14.2.1
       local-pkg: 1.1.2
-      nuxt: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+      nuxt: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
       vue: 3.5.29(typescript@5.9.3)
     transitivePeerDependencies:
       - magicast
@@ -8302,6 +8339,10 @@ snapshots:
     dependencies:
       '@babel/parser': 7.29.0
       ast-kit: 2.2.0
+
+  async-retry@1.3.3:
+    dependencies:
+      retry: 0.13.1
 
   async-sema@3.1.1: {}
 
@@ -8988,7 +9029,7 @@ snapshots:
     dependencies:
       tiny-inflate: 1.0.3
 
-  fontless@0.2.1(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)):
+  fontless@0.2.1(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)):
     dependencies:
       consola: 3.4.2
       css-tree: 3.1.0
@@ -9002,7 +9043,7 @@ snapshots:
       pathe: 2.0.3
       ufo: 1.6.3
       unifont: 0.7.4
-      unstorage: 1.17.4(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
+      unstorage: 1.17.4(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
     optionalDependencies:
       vite: 7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2)
     transitivePeerDependencies:
@@ -9238,6 +9279,8 @@ snapshots:
     dependencies:
       binary-extensions: 2.3.0
 
+  is-buffer@2.0.5: {}
+
   is-core-module@2.16.1:
     dependencies:
       hasown: 2.0.2
@@ -9264,6 +9307,8 @@ snapshots:
       is-path-inside: 4.0.0
 
   is-module@1.0.0: {}
+
+  is-node-process@1.2.0: {}
 
   is-number@7.0.0: {}
 
@@ -9656,7 +9701,7 @@ snapshots:
 
   nanotar@0.2.1: {}
 
-  nitropack@2.13.1(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)):
+  nitropack@2.13.1(@libsql/client@0.17.0)(@vercel/blob@2.3.2)(drizzle-orm@0.45.1(@libsql/client@0.17.0)):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.4.2
       '@rollup/plugin-alias': 6.0.0(rollup@4.59.0)
@@ -9723,7 +9768,7 @@ snapshots:
       unenv: 2.0.0-rc.24
       unimport: 5.7.0
       unplugin-utils: 0.3.1
-      unstorage: 1.17.4(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
+      unstorage: 1.17.4(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
       untyped: 2.0.0
       unwasm: 0.5.3
       youch: 4.1.0
@@ -9802,7 +9847,7 @@ snapshots:
     dependencies:
       boolbase: 1.0.0
 
-  nuxt-link-checker@4.3.9(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3)):
+  nuxt-link-checker@4.3.9(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3)):
     dependencies:
       '@nuxt/devtools-kit': 3.2.2(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
@@ -9820,7 +9865,7 @@ snapshots:
       std-env: 3.10.0
       ufo: 1.6.3
       ultrahtml: 1.6.0
-      unstorage: 1.17.4(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
+      unstorage: 1.17.4(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
     transitivePeerDependencies:
       - '@azure/app-configuration'
       - '@azure/cosmos'
@@ -9845,7 +9890,7 @@ snapshots:
       - vite
       - vue
 
-  nuxt-og-image@6.2.0(5a4e44d27a4cba84d65ccd373eeb0c2f):
+  nuxt-og-image@6.2.0(7585681b44497df2120745eca68e6de5):
     dependencies:
       '@clack/prompts': 1.1.0
       '@nuxt/devtools-kit': 3.2.4(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
@@ -9862,9 +9907,9 @@ snapshots:
       magic-string: 0.30.21
       magicast: 0.5.2
       mocked-exports: 0.1.1
-      nuxt-site-config: 4.0.1(@nuxt/schema@4.4.2)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
-      nuxtseo-layer-devtools: 0.3.0(573cee30494dd711ebc1e5c83b195ba5)
-      nuxtseo-shared: 0.7.0(a56eb3acbd0b38ad427f389b17841455)
+      nuxt-site-config: 4.0.1(@nuxt/schema@4.4.2)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
+      nuxtseo-layer-devtools: 0.3.0(30d1819f8580b11424b5fdaf7ab9ca7f)
+      nuxtseo-shared: 0.7.0(fdbd0c4afaf983fcd7f66200eb2ac52e)
       nypm: 0.6.5
       ofetch: 1.5.1
       ohash: 2.0.11
@@ -9881,9 +9926,9 @@ snapshots:
       ufo: 1.6.3
       ultrahtml: 1.6.0
       unplugin: 3.0.0
-      unstorage: 1.17.4(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
+      unstorage: 1.17.4(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)
     optionalDependencies:
-      fontless: 0.2.1(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+      fontless: 0.2.1(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       playwright-core: 1.58.2
       tailwindcss: 4.2.2
       unifont: 0.7.4
@@ -9960,14 +10005,14 @@ snapshots:
       - vite
       - vue
 
-  nuxt-schema-org@6.0.0(7ef6cbdc2f3cc745b4203c1d29d5155f):
+  nuxt-schema-org@6.0.0(680b0c2df712d7e3ddb7c7f0883b823c):
     dependencies:
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
       '@unhead/schema-org': 2.1.12(@unhead/vue@2.1.12(vue@3.5.29(typescript@5.9.3)))
       defu: 6.1.4
-      nuxt-site-config: 4.0.1(@nuxt/schema@4.4.2)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
-      nuxtseo-layer-devtools: 0.3.0(573cee30494dd711ebc1e5c83b195ba5)
-      nuxtseo-shared: 0.7.0(a56eb3acbd0b38ad427f389b17841455)
+      nuxt-site-config: 4.0.1(@nuxt/schema@4.4.2)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
+      nuxtseo-layer-devtools: 0.3.0(30d1819f8580b11424b5fdaf7ab9ca7f)
+      nuxtseo-shared: 0.7.0(fdbd0c4afaf983fcd7f66200eb2ac52e)
       pkg-types: 2.3.0
     optionalDependencies:
       '@unhead/vue': 2.1.12(vue@3.5.29(typescript@5.9.3))
@@ -10086,12 +10131,12 @@ snapshots:
       - vite
       - vue
 
-  nuxt-site-config@4.0.1(@nuxt/schema@4.4.2)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3)):
+  nuxt-site-config@4.0.1(@nuxt/schema@4.4.2)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3)):
     dependencies:
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
       h3: 1.15.10
       nuxt-site-config-kit: 4.0.1(magicast@0.5.2)(vue@3.5.29(typescript@5.9.3))
-      nuxtseo-shared: 0.7.0(a56eb3acbd0b38ad427f389b17841455)
+      nuxtseo-shared: 0.7.0(fdbd0c4afaf983fcd7f66200eb2ac52e)
       pathe: 2.0.3
       pkg-types: 2.3.0
       site-config-stack: 4.0.1(vue@3.5.29(typescript@5.9.3))
@@ -10104,16 +10149,16 @@ snapshots:
       - vue
       - zod
 
-  nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2):
+  nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2):
     dependencies:
       '@dxup/nuxt': 0.3.2(magicast@0.5.2)
       '@nuxt/cli': 3.33.1(@nuxt/schema@4.3.1)(cac@6.7.14)(magicast@0.5.2)
       '@nuxt/devtools': 3.2.2(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
       '@nuxt/kit': 4.3.1(magicast@0.5.2)
-      '@nuxt/nitro-server': 4.3.1(@libsql/client@0.17.0)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(typescript@5.9.3)
+      '@nuxt/nitro-server': 4.3.1(@libsql/client@0.17.0)(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(typescript@5.9.3)
       '@nuxt/schema': 4.3.1
       '@nuxt/telemetry': 2.7.0(@nuxt/kit@4.3.1(magicast@0.5.2))
-      '@nuxt/vite-builder': 4.3.1(@types/node@25.3.3)(lightningcss@1.32.0)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3))(yaml@2.8.2)
+      '@nuxt/vite-builder': 4.3.1(@types/node@25.3.3)(lightningcss@1.32.0)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vue@3.5.29(typescript@5.9.3))(yaml@2.8.2)
       '@unhead/vue': 2.1.9(vue@3.5.29(typescript@5.9.3))
       '@vue/shared': 3.5.29
       c12: 3.3.3(magicast@0.5.2)
@@ -10228,15 +10273,15 @@ snapshots:
       - xml2js
       - yaml
 
-  nuxtseo-layer-devtools@0.3.0(573cee30494dd711ebc1e5c83b195ba5):
+  nuxtseo-layer-devtools@0.3.0(30d1819f8580b11424b5fdaf7ab9ca7f):
     dependencies:
       '@nuxt/devtools-kit': 4.0.0-alpha.3(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
-      '@nuxt/fonts': 0.14.0(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
+      '@nuxt/fonts': 0.14.0(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0)(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
       '@nuxt/kit': 4.4.2(magicast@0.5.2)
-      '@nuxt/ui': 4.6.0(@tiptap/extensions@3.20.5(@tiptap/core@3.20.5(@tiptap/pm@3.20.5))(@tiptap/pm@3.20.5))(@tiptap/y-tiptap@3.0.2(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.7)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(embla-carousel@8.6.0)(ioredis@5.10.0)(magicast@0.5.2)(tailwindcss@4.2.2)(typescript@5.9.3)(valibot@1.3.1(typescript@5.9.3))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue-router@4.6.4(vue@3.5.29(typescript@5.9.3)))(vue@3.5.29(typescript@5.9.3))(yjs@13.6.30)
+      '@nuxt/ui': 4.6.0(@tiptap/extensions@3.20.5(@tiptap/core@3.20.5(@tiptap/pm@3.20.5))(@tiptap/pm@3.20.5))(@tiptap/y-tiptap@3.0.2(prosemirror-model@1.25.4)(prosemirror-state@1.4.4)(prosemirror-view@1.41.7)(y-protocols@1.0.7(yjs@13.6.30))(yjs@13.6.30))(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(embla-carousel@8.6.0)(ioredis@5.10.0)(magicast@0.5.2)(tailwindcss@4.2.2)(typescript@5.9.3)(valibot@1.3.1(typescript@5.9.3))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue-router@4.6.4(vue@3.5.29(typescript@5.9.3)))(vue@3.5.29(typescript@5.9.3))(yjs@13.6.30)
       '@shikijs/langs': 4.0.2
       '@shikijs/themes': 4.0.2
-      '@vueuse/nuxt': 14.2.1(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
+      '@vueuse/nuxt': 14.2.1(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
       ofetch: 1.5.1
       shiki: 4.0.2
       ufo: 1.6.3
@@ -10293,7 +10338,7 @@ snapshots:
       - yup
       - zod
 
-  nuxtseo-shared@0.7.0(a56eb3acbd0b38ad427f389b17841455):
+  nuxtseo-shared@0.7.0(fdbd0c4afaf983fcd7f66200eb2ac52e):
     dependencies:
       '@clack/prompts': 1.1.0
       '@nuxt/devtools-kit': 4.0.0-alpha.3(magicast@0.5.2)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
@@ -10302,7 +10347,7 @@ snapshots:
       birpc: 4.0.0
       consola: 3.4.2
       defu: 6.1.4
-      nuxt: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
+      nuxt: 4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2)
       ofetch: 1.5.1
       pathe: 2.0.3
       pkg-types: 2.3.0
@@ -10312,7 +10357,7 @@ snapshots:
       ufo: 1.6.3
       vue: 3.5.29(typescript@5.9.3)
     optionalDependencies:
-      nuxt-site-config: 4.0.1(@nuxt/schema@4.4.2)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
+      nuxt-site-config: 4.0.1(@nuxt/schema@4.4.2)(magicast@0.5.2)(nuxt@4.3.1(@libsql/client@0.17.0)(@parcel/watcher@2.5.6)(@types/node@25.3.3)(@vercel/blob@2.3.2)(@vue/compiler-sfc@3.5.30)(cac@6.7.14)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(drizzle-orm@0.45.1(@libsql/client@0.17.0))(ioredis@5.10.0)(lightningcss@1.32.0)(magicast@0.5.2)(rollup@4.59.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(typescript@5.9.3)(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(yaml@2.8.2))(vite@7.3.1(@types/node@25.3.3)(jiti@2.6.1)(lightningcss@1.32.0)(sass@1.98.0)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))(vue@3.5.29(typescript@5.9.3))
     transitivePeerDependencies:
       - magicast
       - vite
@@ -10934,6 +10979,8 @@ snapshots:
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
+  retry@0.13.1: {}
+
   reusify@1.1.0: {}
 
   rfdc@1.4.1: {}
@@ -11254,6 +11301,8 @@ snapshots:
     transitivePeerDependencies:
       - react-native-b4a
 
+  throttleit@2.1.0: {}
+
   tiny-inflate@1.0.3: {}
 
   tiny-invariant@1.3.3: {}
@@ -11312,6 +11361,8 @@ snapshots:
       unplugin: 2.3.11
 
   undici-types@7.18.2: {}
+
+  undici@6.24.1: {}
 
   unenv@2.0.0-rc.24:
     dependencies:
@@ -11476,7 +11527,7 @@ snapshots:
       picomatch: 4.0.3
       webpack-virtual-modules: 0.6.2
 
-  unstorage@1.17.4(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0):
+  unstorage@1.17.4(@vercel/blob@2.3.2)(db0@0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0)))(ioredis@5.10.0):
     dependencies:
       anymatch: 3.1.3
       chokidar: 5.0.0
@@ -11487,6 +11538,7 @@ snapshots:
       ofetch: 1.5.1
       ufo: 1.6.3
     optionalDependencies:
+      '@vercel/blob': 2.3.2
       db0: 0.3.4(@libsql/client@0.17.0)(drizzle-orm@0.45.1(@libsql/client@0.17.0))
       ioredis: 5.10.0
 

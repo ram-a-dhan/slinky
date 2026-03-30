@@ -81,6 +81,27 @@ TURNSTILE_SECRET_KEY=your-secret-key
 
 [cloudflare-dash]: https://dash.cloudflare.com/
 
+### Vercel Storage
+
+Setup a [Vercel Blob](vercel-blob) and make use of [Vercel CLI](vercel-cli):
+
+```bash
+pnpm add -g vercel
+vercel link
+vercel storage create
+vercel env pull
+```
+
+After pulling the env, copy them from `.env.local` to `.env`:
+
+```bash
+BLOB_READ_WRITE_TOKEN=your-read-write-token
+VERCEL_OIDC_TOKEN=your-vercel-oidc-token
+```
+
+[vercel-blob]: https://vercel.com/docs/vercel-blob/using-blob-sdk
+[vercel-cli]: https://vercel.com/docs/cli/blob
+
 ### Miscellaneous
 
 For production, change the base URL to your production base URL:

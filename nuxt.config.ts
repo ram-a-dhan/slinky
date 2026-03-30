@@ -65,6 +65,7 @@ export default defineNuxtConfig({
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
     GOOGLE_REDIRECT_URI: process.env.GOOGLE_REDIRECT_URI,
     TURNSTILE_SECRET_KEY: process.env.TURNSTILE_SECRET_KEY,
+    BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
     public: {
       BASE_URL: process.env.BASE_URL,
     },
