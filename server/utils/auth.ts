@@ -8,7 +8,7 @@ export const requireAuth = (event: H3Event, requireAuthOptions?: IRequireAuthOpt
   const { isAdminOnly = false } = requireAuthOptions || {};
 
   const token = getCookie(event, "auth_token");
-  
+
   if (!token) throw createError({
     statusCode: HTTP_STATUS.NOT_AUTHENTICATED,
     statusMessage: "Not authenticated.",
