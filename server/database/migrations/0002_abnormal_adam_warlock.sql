@@ -1,0 +1,1 @@
+ALTER TABLE `qr_options` ADD `invert` integer;

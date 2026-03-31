@@ -8,7 +8,8 @@ export const useQrStore = defineStore("qr", () => {
     style: "rounded",
     color1: "000000",
     color2: "000000",
-    gradientType: "linear",
+    invert: false,
+    gradientType: "none",
     gradientAngle: 0,
     imageUrl: "",
   });

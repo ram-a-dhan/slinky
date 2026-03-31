@@ -15,6 +15,13 @@
       "when": 1774488847850,
       "tag": "0001_good_umar",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1774916313705,
+      "tag": "0002_abnormal_adam_warlock",
+      "breakpoints": true
     }
   ]
 }
