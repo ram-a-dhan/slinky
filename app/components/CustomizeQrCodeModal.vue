@@ -158,9 +158,15 @@ const debouncedOnChange = useDebounce(onChange, 2000);
 
         <!-- COLORS -->
         <Fieldset legend="Colors">
-          <div class="qr-form__colors">
-            <div class="qr-form__colors-foreground">
-              <div class="labeled">
+          <div class="relative-container">
+            <i
+              class="color-info pi pi-info-circle"
+              v-tooltip.top="{ value: 'Choose a contrasting color combination so it can be read by QR code scanners.' }"
+            />
+          </div>
+          <div class="qr-form__col">
+            <div class="qr-form__row">
+              <div class="qr-form__labeled">
                 <ColorPicker
                   name="color1"
                   inputId="color1"
@@ -175,7 +181,7 @@ const debouncedOnChange = useDebounce(onChange, 2000);
                   </div>
                 </label>
               </div>
-              <div class="labeled">
+              <div class="qr-form__labeled">
                 <ColorPicker
                   name="color2"
                   inputId="color2"
@@ -196,8 +202,8 @@ const debouncedOnChange = useDebounce(onChange, 2000);
                 </label>
               </div>
             </div>
-            <div class="qr-form__colors-background">
-              <div class="labeled">
+            <div class="qr-form__row">
+              <div class="qr-form__labeled">
                 <ToggleSwitch
                   name="invert"
                   inputId="invert"
@@ -208,19 +214,15 @@ const debouncedOnChange = useDebounce(onChange, 2000);
                   Invert Background
                 </label>
               </div>
-              <i
-                class="pi pi-info-circle"
-                v-tooltip.top="{ value: 'Choose a contrasting color combination so it can be read by QR code scanners.' }"
-              />
             </div>
           </div>
         </Fieldset>
 
         <!-- GRADIENT -->
         <Fieldset legend="Gradient">
-          <div class="qr-form__gradient">
-            <div class="qr-form__gradient-type">
-              <div class="labeled" v-for="gradType in gradientTypeList">
+          <div class="qr-form__col">
+            <div class="qr-form__row">
+              <div class="qr-form__labeled" v-for="gradType in gradientTypeList">
                 <RadioButton
                   :inputId="gradType.value"
                   name="gradientType"
@@ -233,7 +235,7 @@ const debouncedOnChange = useDebounce(onChange, 2000);
                 </label>
               </div>
             </div>
-            <div class="qr-form__gradient-angle">
+            <div class="qr-form__row">
               <Slider
                 name="gradientAngle"
                 :min="0"
@@ -334,46 +336,23 @@ label {
 }
 
 .qr-form {
-  &__colors {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-  
-  &__colors-foreground {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.25rem;
-  }
-  
-  &__colors-background {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 1.25rem;
-
-    i {
-      margin-left: auto;
-    }
-  }
-
-  &__gradient {
+  &__col {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
   }
 
-  &__gradient-type {
+  &__row {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 1.25rem;
   }
 
-  &__gradient-angle {
+  &__labeled {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 0.5rem;
   }
 
   &__upload {
@@ -389,10 +368,15 @@ label {
   }
 }
 
-.labeled {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.relative-container {
+  position: relative;
+  width: 100%;
+}
+
+.color-info {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .label-disabled {
@@ -401,7 +385,6 @@ label {
 
 .gradient-angle {
   flex: 2;
-  margin: 0.6rem;
 
   &__number {
     width: 4rem;
