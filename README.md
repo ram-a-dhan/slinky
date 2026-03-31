@@ -28,8 +28,8 @@ cp .env.example .env
 For production, change `.env` database URL to Turso and fill the token:
 
 ```bash
-DB_URL=libsql://example-db.turso.io
-DB_TOKEN=example-token-123
+TURSO_DB_URL=libsql://example-db.turso.io
+TURSO_AUTH_TOKEN=example-token-123
 ```
 
 Create and seed the database:
