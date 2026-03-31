@@ -18,7 +18,8 @@ export const qrCodeOptions = ({
   style = "rounded",
   color1 = "#000000",
   color2 = "#000000",
-  gradientType = "linear",
+  invert = false,
+  gradientType = "none",
   gradientAngle = 0,
   imageUrl = slinky,
 }: Partial<IQrOptions> = {}): Options => {
@@ -55,7 +56,8 @@ export const qrCodeOptions = ({
     dotsOptions: {
       type: styleOptions[style].dots,
       roundSize: true,
-      gradient: {
+      color: color1.startsWith("#") ? color1 : `#${color1}`,
+      gradient: gradientType === "none" ? undefined : {
         type: gradientType,
         rotation: gradientAngle,
         colorStops: [
@@ -70,13 +72,16 @@ export const qrCodeOptions = ({
         ],
       },
     },
+    backgroundOptions: {
+      color: invert ? "#000000" : "#ffffff",
+    },
     cornersSquareOptions: {
       type: styleOptions[style].cornerSquare,
-      color: "#000000",
+      color: invert ? "#ffffff" : "#000000",
     },
     cornersDotOptions: {
       type: styleOptions[style].cornerDot,
-      color: "#000000",
+      color: invert ? "#ffffff" : "#000000",
     },
   };
 };

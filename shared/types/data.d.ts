@@ -21,7 +21,8 @@ export interface IQrOptions {
   style: "rounded" | "circles" | "diamond";
   color1: string;
   color2: string;
-  gradientType: "linear" | "radial";
+  invert: boolean;
+  gradientType: "none" | "linear" | "radial";
   gradientAngle: number;
   imageUrl: string;
   userId: string;

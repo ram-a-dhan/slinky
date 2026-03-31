@@ -67,6 +67,7 @@ export default defineEventHandler(async (event) => {
       style: body.find((field) => field.name === "style")?.data.toString(),
       color1: body.find((field) => field.name === "color1")?.data.toString(),
       color2: body.find((field) => field.name === "color2")?.data.toString(),
+      invert: body.find((field) => field.name === "invert")?.data.toString().toLowerCase() === "true",
       gradientType: body.find((field) => field.name === "gradientType")?.data.toString(),
       gradientAngle: Number(body.find((field) => field.name === "gradientAngle")?.data.toString()),
       imageUrl,
@@ -76,23 +77,11 @@ export default defineEventHandler(async (event) => {
       .insert(qrOptionSchema)
       .values({
         userId,
-        style: values.style,
-        color1: values.color1,
-        color2: values.color2,
-        gradientType: values.gradientType,
-        gradientAngle: values.gradientAngle,
-        imageUrl: values.imageUrl,
+        ...values,
       })
       .onConflictDoUpdate({
         target: qrOptionSchema.userId,
-        set: {
-          style: values.style,
-          color1: values.color1,
-          color2: values.color2,
-          gradientType: values.gradientType,
-          gradientAngle: values.gradientAngle,
-          imageUrl: values.imageUrl,
-        },
+        set: values,
       })
       .returning();
   
