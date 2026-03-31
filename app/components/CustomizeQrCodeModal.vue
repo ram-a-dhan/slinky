@@ -31,6 +31,7 @@ const styleList = ref([
   { value: "diamond", label: "Diamond" },
 ]);
 const gradientTypeList = ref([
+  { value: "none", label: "None" },
   { value: "linear", label: "Linear" },
   { value: "radial", label: "Radial" },
 ]);
@@ -57,6 +58,7 @@ const onSubmit = async (event: FormSubmitEvent) => {
     body.append("style", options.style);
     body.append("color1", options.color1);
     body.append("color2", options.color2);
+    body.append("invert", options.invert);
     body.append("gradientType", options.gradientType);
     body.append("gradientAngle", options.gradientAngle);
     if (fileUploadFile.value) {
@@ -93,7 +95,6 @@ const onSubmit = async (event: FormSubmitEvent) => {
   } finally {
     loading.value = false;
   }
-  
 }; 
 
 const onFileDelete = () => {
@@ -158,36 +159,60 @@ const debouncedOnChange = useDebounce(onChange, 2000);
         <!-- COLORS -->
         <Fieldset legend="Colors">
           <div class="qr-form__colors">
-            <div class="labeled">
-              <ColorPicker
-                name="color1"
-                inputId="color1"
-                format="hex"
-                :defaultColor="initialValues.color1"
-                @change="debouncedOnChange"
-                :disabled="loading"
-              />
-              <label for="color1">
-                #{{ $form.color1?.value }}
-              </label>
+            <div class="qr-form__colors-foreground">
+              <div class="labeled">
+                <ColorPicker
+                  name="color1"
+                  inputId="color1"
+                  format="hex"
+                  :defaultColor="initialValues.color1"
+                  @change="debouncedOnChange"
+                  :disabled="loading"
+                />
+                <label for="color1">
+                  <div class="p-inputtext p-component p-filled p-inputtext-fluid">
+                    #{{ $form.color1?.value }}
+                  </div>
+                </label>
+              </div>
+              <div class="labeled">
+                <ColorPicker
+                  name="color2"
+                  inputId="color2"
+                  format="hex"
+                  :defaultColor="initialValues.color2"
+                  @change="debouncedOnChange"
+                  :disabled="loading || $form.gradientType?.value === 'none'"
+                />
+                <label for="color2" :class="$form.gradientType?.value === 'none' ? 'label-disabled' : undefined">
+                  <div
+                    :class="[
+                      'p-inputtext p-component p-filled p-inputtext-fluid',
+                      $form.gradientType?.value === 'none' ? 'p-disabled' : undefined,
+                    ]"
+                  >
+                  #{{ $form.color2?.value }}
+                  </div>
+                </label>
+              </div>
             </div>
-            <div class="labeled">
-              <ColorPicker
-                name="color2"
-                inputId="color2"
-                format="hex"
-                :defaultColor="initialValues.color2"
-                @change="debouncedOnChange"
-                :disabled="loading"
+            <div class="qr-form__colors-background">
+              <div class="labeled">
+                <ToggleSwitch
+                  name="invert"
+                  inputId="invert"
+                  @change="onChange"
+                  :disabled="loading"
+                />
+                <label for="invert">
+                  Invert Background
+                </label>
+              </div>
+              <i
+                class="pi pi-info-circle"
+                v-tooltip.top="{ value: 'Choose a contrasting color combination so it can be read by QR code scanners.' }"
               />
-              <label for="color2">
-                #{{ $form.color2?.value }}
-              </label>
             </div>
-            <i
-              class="pi pi-info-circle"
-              v-tooltip.top="{ value: 'Choose darker colors so it can be read by QR code scanners.' }"
-            />
           </div>
         </Fieldset>
 
@@ -311,6 +336,19 @@ label {
 .qr-form {
   &__colors {
     display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  
+  &__colors-foreground {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+  }
+  
+  &__colors-background {
+    display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 1.25rem;
@@ -355,6 +393,10 @@ label {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+.label-disabled {
+  cursor: default;
 }
 
 .gradient-angle {
