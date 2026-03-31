@@ -58,8 +58,8 @@ export default defineNuxtConfig({
   },
   turnstile: { siteKey: process.env.TURNSTILE_SITE_KEY },
   runtimeConfig: {
-    DB_URL: process.env.DB_URL,
-    DB_TOKEN: process.env.DB_TOKEN,
+    TURSO_DB_URL: process.env.TURSO_DB_URL,
+    TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN,
     JWT_SECRET: process.env.JWT_SECRET,
     GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
     GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,

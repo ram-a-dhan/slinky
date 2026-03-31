@@ -12,17 +12,17 @@ export const useDb = () => {
 		try {
 			// For use in Nuxt environment where runtime config is available
 			const config = useRuntimeConfig();
-			url = config.DB_URL;
-			authToken = config.DB_TOKEN;
+			url = config.TURSO_DB_URL;
+			authToken = config.TURSO_AUTH_TOKEN;
 		} catch {
 			// Fallback for other environments (e.g., during build or in scripts)
-			url = process.env.DB_URL;
-			authToken = process.env.DB_TOKEN;	
+			url = process.env.TURSO_DB_URL;
+			authToken = process.env.TURSO_AUTH_TOKEN;	
 		}
-		
+
 		const client = createClient({
-				url: url!,
-				authToken,
+			url: url!,
+			authToken,
 		})
 		_db = drizzle(client, { schema });
   }
