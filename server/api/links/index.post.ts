@@ -40,6 +40,8 @@ export default defineEventHandler(async (event) => {
         statusMessage: "Link target invalid, must be valid HTTP/HTTPS URL.",
       });
 
+    await scanUrl(body.target);
+
     const db = useDb();
 
     const links = await db
