@@ -49,14 +49,14 @@ pnpm run db:studio
 
 ### Google Sign-In
 
-Make a new OAuth Consent Screen project at [Google Cloud Console](google-cloud) and add the credentials to your `.env`:
+Make a new [OAuth Consent Screen](oauth-consent-screen) project at Google Cloud Console and add the credentials to your `.env`:
+
+[oauth-consent-screen]: https://console.cloud.google.com/auth
 
 ```bash
 GOOGLE_CLIENT_ID=your-client-id-123
 GOOGLE_CLIENT_SECRET=your-client-secret-123
 ```
-
-[google-cloud]: https://console.cloud.google.com/projectcreate
 
 Add the Google Redirect URI from the `.env` to Google Cloud Console's client's Authorized Redirect URIs:
 
@@ -69,6 +69,16 @@ For production, change the redirect URI:
 ```bash
 GOOGLE_REDIRECT_URI=http://<YOUR.PRODUCTION.DOMAIN>/api/auth/google/callback
 ```
+
+### Google Safe Browsing
+
+Enable [Safe Browsing API](safe-browsing-api) in API & Services at Google Cloud Console and get the API Key:
+
+```bash
+GOOGLE_SAFE_BROWSING_API_KEY=your-api-key
+```
+
+[safe-browsing-api]: https://console.cloud.google.com/apis/api/safebrowsing.googleapis.com
 
 ### Cloudflare Captcha
 
