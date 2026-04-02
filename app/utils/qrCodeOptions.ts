@@ -48,6 +48,7 @@ export const qrCodeOptions = ({
     height: 800,
     image: imageUrl || slinky,
     imageOptions: {
+      crossOrigin: "anonymous",
       saveAsBlob: true,
       hideBackgroundDots: true,
       imageSize: 0.4,

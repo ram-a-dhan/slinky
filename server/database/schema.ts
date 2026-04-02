@@ -30,3 +30,9 @@ export const links = sqliteTable("links", {
   createdAt: integer("created_at", { mode: "timestamp" }).notNull().$defaultFn(() => new Date()),
   lastAccessedAt: integer("last_accessed_at", { mode: "timestamp" }).notNull().$defaultFn(() => new Date()),
 });
+
+export const rateLimits = sqliteTable("rate_limits", {
+  ip: text("ip").primaryKey(),
+  count: integer("count").notNull().default(1),
+  resetAt: integer("reset_at", { mode: "timestamp_ms" }).notNull(),
+});

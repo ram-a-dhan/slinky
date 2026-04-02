@@ -9,7 +9,7 @@ const { signIn } = useAuthStore();
 <template>
 <Dialog v-model:visible="visible" modal header="Sign In">
   <div class="login-modal">
-    <p>Sign in to have customizable shortlinks.</p>
+    <p>Sign in to have customizable shortlinks and QR Codes.</p>
   
     <Button
       severity="info"

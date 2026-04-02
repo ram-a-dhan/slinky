@@ -22,6 +22,13 @@
       "when": 1774916313705,
       "tag": "0002_abnormal_adam_warlock",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1775102835497,
+      "tag": "0003_soft_shiver_man",
+      "breakpoints": true
     }
   ]
 }
