@@ -1,9 +1,14 @@
 import { nanoid } from "nanoid";
 import { eq } from "drizzle-orm";
 import { links as linkSchema } from "#server/database/schema";
+import { rateLimit } from "#server/utils/limit";
 
 export default defineEventHandler(async (event) => {
   try {
+    const ip = getRequestIP(event, { xForwardedFor: true });
+
+    if (ip && !import.meta.dev) await rateLimit(ip, 3, 24);
+
     const body: ILink = await readBody(event);
 
     if (!body?.target) throw createError({

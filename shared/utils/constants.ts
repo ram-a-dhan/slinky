@@ -8,6 +8,7 @@ export const HTTP_STATUS = {
   NOT_AUTHORIZED: 403, 
   NOT_FOUND: 404,
   CONFLICT: 409,
+  TOO_MANY_REQUESTS: 429,
   INTERNAL_SERVER_ERROR: 500,
 } as const;
 
@@ -21,8 +22,8 @@ export const HTTP_METHOD = {
 export const REGEX = {
   EMAIL: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
   USERNAME: /^[a-zA-Z0-9]{8,16}$/,
-  LINK_SLUG: /[\w\-]{8,}/,
-  LINK_TARGET: /https?:\/\/[^\s]+/,
+  LINK_SLUG: /^[\w\-]{8,}$/,
+  LINK_TARGET: /^https?:\/\/[^\s]+$/,
 };
 
 export const NUXT_PREFIXES = ["/_nuxt", "/api", "/__nuxt", "/@", "/favicon"];
