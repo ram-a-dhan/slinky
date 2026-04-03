@@ -1,5 +1,5 @@
-import { eq } from "drizzle-orm";
-import { links as linkSchema } from "#server/database/schema";
+import { eq, sql } from "drizzle-orm";
+import { users as userSchema, links as linkSchema } from "#server/database/schema";
 
 export default defineEventHandler(async (event) => {
   try {
@@ -13,11 +13,31 @@ export default defineEventHandler(async (event) => {
     });
 
     const db = useDb();
-    const result = await db
-      .delete(linkSchema)
-      .where(eq(linkSchema.id, id));
 
-    if (!result.rowsAffected) throw createError({
+    const result = await db.transaction(async (tx) => {
+      const link = await tx
+        .delete(linkSchema)
+        .where(eq(linkSchema.id, id))
+        .returning()
+        .get();
+
+      let user;
+      if (link?.userId) {
+        user = await tx
+          .update(userSchema)
+          .set({ hitCount: sql`hit_count - ${link.hitCount}` })
+          .where(eq(userSchema.id, link.userId))
+          .returning()
+          .get();
+      }
+
+      return {
+        link,
+        user,
+      }
+    });
+
+    if (!result.link) throw createError({
       statusCode: HTTP_STATUS.NOT_FOUND,
       statusMessage: "Link not found.",
     });
