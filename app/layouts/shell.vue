@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { signOut } = useAuthStore()
+const { isMobile } = useMobile(900);
 
 // Page Title from route.
 const route = useRoute();
@@ -17,20 +18,6 @@ const isShowDrawer = ref(false);
 const setIsShowDrawer = () => {
   isShowDrawer.value = !isShowDrawer.value;
 }
-
-// Switch between drawer or sidebar based on viewport width.
-const viewWidth = ref(900);
-const handleWidth = () => {
-  viewWidth.value = window.innerWidth;
-};
-onMounted(() => {
-  handleWidth();
-  window.addEventListener("resize", handleWidth);
-})
-onUnmounted(() => {
-  window.removeEventListener("resize", handleWidth);
-})
-const isMobile = computed(() => viewWidth.value < 900);
 
 // Confirm signing out
 const confirm = useConfirm();
@@ -115,25 +102,27 @@ const settingItems = ref([
         Slinky
       </h1>
     </div>
-    <nav class="sidebar__nav">
-      <Menu :model="navItems">
-        <template #item="{ item }">
-          <NuxtLink :to="item.path"  v-ripple class="p-ripple nav-item">
-            <i :class="item.icon" />
-            <span>{{ item.label }}</span>
-          </NuxtLink>
-        </template>
-      </Menu>
-    </nav>
-    <div class="sidebar__settings">
-      <Menu :model="settingItems">
-        <template #item="{ item }">
-          <div role="button"  v-ripple class="p-ripple nav-item" @click="item.action">
-            <i :class="item.icon" />
-            {{ item.label }}
-          </div>
-        </template>
-      </Menu>
+    <div class="sidebar__content">
+      <nav class="sidebar__nav">
+        <Menu :model="navItems">
+          <template #item="{ item }">
+            <NuxtLink :to="item.path"  v-ripple class="p-ripple nav-item">
+              <i :class="item.icon" />
+              <span>{{ item.label }}</span>
+            </NuxtLink>
+          </template>
+        </Menu>
+      </nav>
+      <div class="sidebar__settings">
+        <Menu :model="settingItems">
+          <template #item="{ item }">
+            <div role="button"  v-ripple class="p-ripple nav-item" @click="item.action">
+              <i :class="item.icon" />
+              {{ item.label }}
+            </div>
+          </template>
+        </Menu>
+      </div>
     </div>
   </aside>
   
@@ -176,15 +165,23 @@ const settingItems = ref([
   top: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
   height: 100vh;
   height: 100dvh;
-  padding: 1.25rem;
   border-right: 1px solid var(--p-toolbar-border-color);
   
   &__brand h1 {
     font-size: 1.5rem;
     font-weight: bold;
+    padding: 1.25rem;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    height: 100%;
+    padding: 0 1.25rem 1.25rem;
+    overflow: visible auto;
   }
 
   &__settings {
