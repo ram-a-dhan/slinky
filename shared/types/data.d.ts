@@ -2,7 +2,8 @@ export interface IUser {
   id: string;
   email: string;
   username: string;
-  lastAccessedAt: Date;
+  linkCount: number;
+  hitCount: number;
   createdAt: Date;
   lastAccessedAt: Date;
 }
@@ -12,6 +13,7 @@ export interface ILink {
   slug: string;
   target: string;
   userId?: string;
+  hitCount: number;
   createdAt: Date;
   lastAccessedAt: Date;
 }
