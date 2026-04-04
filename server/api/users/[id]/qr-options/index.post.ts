@@ -37,13 +37,14 @@ export default defineEventHandler(async (event) => {
       const existing = await db
         .select()
         .from(qrOptionSchema)
-        .where(eq(qrOptionSchema.userId, userId));
+        .where(eq(qrOptionSchema.userId, userId))
+        .get();
 
       const config = useRuntimeConfig();
       
-      if (existing?.[0]?.imageUrl) {
+      if (existing?.imageUrl) {
         await del(
-          existing[0].imageUrl,
+          existing.imageUrl,
           { token: config.BLOB_READ_WRITE_TOKEN },
         );
       }
@@ -73,7 +74,7 @@ export default defineEventHandler(async (event) => {
       imageUrl,
     };
     
-    const qrOptions = await db
+    const qrOption = await db
       .insert(qrOptionSchema)
       .values({
         userId,
@@ -83,12 +84,13 @@ export default defineEventHandler(async (event) => {
         target: qrOptionSchema.userId,
         set: values,
       })
-      .returning();
+      .returning()
+      .get();
   
     return {
       statusCode: HTTP_STATUS.CREATED,
       statusMessage: "QR Options saved.",
-      data: qrOptions,
+      data: qrOption,
     };
   } catch (error) {
     return error;

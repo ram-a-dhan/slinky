@@ -13,12 +13,13 @@ export default defineEventHandler(async (event) => {
     });
 
     const db = useDb();
-    const links = await db
+    const link = await db
       .select()
       .from(linkSchema)
-      .where(eq(linkSchema.id, id));
+      .where(eq(linkSchema.id, id))
+      .get();
 
-    if (!links.length) throw createError({
+    if (!link) throw createError({
       statusCode: HTTP_STATUS.NOT_FOUND,
       statusMessage: "Link not found.",
     });
@@ -26,7 +27,7 @@ export default defineEventHandler(async (event) => {
     return {
       statusCode: HTTP_STATUS.OK,
       statusMessage: "Link fetched.",
-      data: links[0],
+      data: link,
     };
   } catch (error) {
     return error;

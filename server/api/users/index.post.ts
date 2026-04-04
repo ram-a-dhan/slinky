@@ -18,29 +18,31 @@ export default defineEventHandler(async (event) => {
     });
 
     const db = useDb();
-    const users = await db
+    const existingUser = await db
       .select()
       .from(userSchema)
       .where(eq(userSchema.email, email))
-      .limit(1);
+      .limit(1)
+      .get();
 
-    if (users.length) throw createError({
+    if (existingUser) throw createError({
       statusCode: HTTP_STATUS.CONFLICT,
       statusMessage: "Email already registered.",
     });
 
-    const newUsers = await db
+    const newUser = await db
       .insert(userSchema)
       .values({
         email,
         username: email.split("@")[0]!.replace(/[\_\-\.]/gim, ""),
       })
-      .returning();
+      .returning()
+      .get();
 
     return {
       statusCode: HTTP_STATUS.CREATED,
       statusMessage: "User created.",
-      data: newUsers[0],
+      data: newUser,
     };
   } catch (error) {
     return error;

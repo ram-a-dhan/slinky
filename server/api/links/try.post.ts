@@ -26,18 +26,19 @@ export default defineEventHandler(async (event) => {
 
     const db = useDb();
 
-    const newLinks = await db
+    const newLink = await db
       .insert(linkSchema)
       .values({
         slug: nanoid(16),
         target: body.target,
       })
-      .returning();
+      .returning()
+      .get();
 
     return {
       statusCode: HTTP_STATUS.CREATED,
       statusMessage: "Link created.",
-      data: newLinks[0],
+      data: newLink,
     };
   } catch (error) {
     return error;
