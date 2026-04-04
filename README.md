@@ -32,13 +32,10 @@ TURSO_DB_URL=libsql://example-db.turso.io
 TURSO_AUTH_TOKEN=example-token-123
 ```
 
-Create and seed the database:
+Migrate the database:
 
 ```bash
-pnpm run db:push
-pnpm run db:generate
 pnpm run db:migrate
-pnpm run db:seed
 ```
 
 Use Drizzle Studio to check database:

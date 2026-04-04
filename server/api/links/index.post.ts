@@ -1,5 +1,5 @@
 import { nanoid } from "nanoid";
-import { eq } from "drizzle-orm";
+import { eq, sql } from "drizzle-orm";
 import { users as userSchema, links as linkSchema } from "#server/database/schema";
 import { verifyUser } from "#server/utils/auth";
 
@@ -67,20 +67,37 @@ export default defineEventHandler(async (event) => {
       statusMessage: "User not found.",
     });
 
-    const newLink = await db
-      .insert(linkSchema)
-      .values({
-        slug: body.slug || nanoid(16),
-        target: body.target,
-        userId: body.userId || null,
-      })
-      .returning()
-      .get();
+    const result = await db.transaction(async(tx) => {
+      const newLink = await tx
+        .insert(linkSchema)
+        .values({
+          slug: body.slug,
+          target: body.target,
+          userId: body.userId,
+        })
+        .returning()
+        .get();
+      
+      let user
+      if (body.userId) {
+        user = await tx
+          .update(userSchema)
+          .set({ linkCount: sql`link_count + 1` })
+          .where(eq(userSchema.id, body.userId))
+          .returning()
+          .get();
+      }
+
+      return{
+        newLink,
+        user,
+      }
+    });
 
     return {
       statusCode: HTTP_STATUS.CREATED,
       statusMessage: "Link created.",
-      data: newLink,
+      data: result.newLink,
     };
   } catch (error) {
     return error;

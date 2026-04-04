@@ -4,6 +4,7 @@ export const users = sqliteTable("users", {
   id: text("id").primaryKey().$defaultFn(() => crypto.randomUUID()),
   email: text("email").notNull().unique(),
   username: text("username").notNull().unique(),
+  linkCount: integer("link_count").notNull().default(0),
   hitCount: integer("hit_count").notNull().default(0),
   createdAt: integer("created_at", { mode: "timestamp" }).notNull().$defaultFn(() => new Date()),
   lastAccessedAt: integer("last_accessed_at", { mode: "timestamp" }).notNull().$defaultFn(() => new Date()),
