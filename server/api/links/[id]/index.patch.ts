@@ -47,42 +47,45 @@ export default defineEventHandler(async (event) => {
 
     const db = useDb();
 
-    const links = await db
+    const link = await db
       .select()
       .from(linkSchema)
-      .where(eq(linkSchema.id, id));
+      .where(eq(linkSchema.id, id))
+      .get();
 
-    if (!links.length) throw createError({
+    if (!link) throw createError({
       statusCode: HTTP_STATUS.NOT_FOUND,
       statusMessage: "Link not found.",
     });
 
-    if (links[0]?.userId !== body.userId) throw createError({
-      statusCode: HTTP_STATUS.BAD_REQUEST,
-      statusMessage: "User ID does not match link owner.",
+    if (link.userId !== body.userId) throw createError({
+      statusCode: HTTP_STATUS.NOT_AUTHORIZED,
+      statusMessage: "Not authorized.",
     });
 
-    const existingLinks = await db
+    const existingLink = await db
       .select()
       .from(linkSchema)
       .where(and(eq(linkSchema.slug, body.slug), ne(linkSchema.id, id)))
-      .limit(1);
+      .limit(1)
+      .get();
 
-    if (existingLinks.length) throw createError({
+    if (existingLink) throw createError({
       statusCode: HTTP_STATUS.CONFLICT,
       statusMessage: "Link slug already exists.",
     });
 
-    const updatedLinks = await db
+    const updatedLink = await db
       .update(linkSchema)
       .set({ slug: body.slug, target: body.target })
       .where(eq(linkSchema.id, id))
-      .returning();
+      .returning()
+      .get();
 
     return {
       statusCode: HTTP_STATUS.OK,
       statusMessage: "Link updated.",
-      data: updatedLinks[0],
+      data: updatedLink,
     };
 
   } catch (error) {

@@ -44,40 +44,43 @@ export default defineEventHandler(async (event) => {
 
     const db = useDb();
 
-    const links = await db
+    const existingLink = await db
       .select()
       .from(linkSchema)
       .where(eq(linkSchema.slug, body.slug))
-      .limit(1);
+      .limit(1)
+      .get();
 
-    if (links.length) throw createError({
+    if (existingLink) throw createError({
       statusCode: HTTP_STATUS.CONFLICT,
       statusMessage: "Link slug already exists.",
     });
 
-    const users = await db
+    const user = await db
       .select()
       .from(userSchema)
-      .where(eq(userSchema.id, body.userId));
+      .where(eq(userSchema.id, body.userId))
+      .get();
 
-    if (!users.length) throw createError({
+    if (!user) throw createError({
       statusCode: HTTP_STATUS.NOT_FOUND,
       statusMessage: "User not found.",
     });
 
-    const newLinks = await db
+    const newLink = await db
       .insert(linkSchema)
       .values({
         slug: body.slug || nanoid(16),
         target: body.target,
         userId: body.userId || null,
       })
-      .returning();
+      .returning()
+      .get();
 
     return {
       statusCode: HTTP_STATUS.CREATED,
       statusMessage: "Link created.",
-      data: newLinks[0],
+      data: newLink,
     };
   } catch (error) {
     return error;

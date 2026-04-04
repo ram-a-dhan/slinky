@@ -13,12 +13,13 @@ export default defineEventHandler(async (event) => {
     });
 
     const db = useDb();
-    const users = await db
+    const user = await db
       .select()
       .from(userSchema)
-      .where(eq(userSchema.id, id));
+      .where(eq(userSchema.id, id))
+      .get();
 
-    if (!users.length) throw createError({
+    if (!user) throw createError({
       statusCode: HTTP_STATUS.NOT_FOUND,
       statusMessage: "User not found.",
     });
@@ -26,7 +27,7 @@ export default defineEventHandler(async (event) => {
     return {
       statusCode: HTTP_STATUS.OK,
       statusMessage: "User fetched.",
-      data: users[0],
+      data: user,
     };
   } catch (error) {
     return error;

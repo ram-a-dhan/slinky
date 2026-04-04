@@ -27,37 +27,35 @@ export default defineEventHandler(async (event) => {
     });
 
     const db = useDb();
-    const users = await db
-      .select()
-      .from(userSchema)
-      .where(eq(userSchema.id, id));
-
-    if (!users.length) throw createError({
-      statusCode: HTTP_STATUS.NOT_FOUND,
-      statusMessage: "User not found.",
-    });
-
-    const existingUsers = await db
+    // Find another user with the same username.
+    const existingUser = await db
       .select()
       .from(userSchema)
       .where(and(eq(userSchema.username, username), ne(userSchema.id, id)))
-      .limit(1);
+      .limit(1)
+      .get();
 
-    if (existingUsers.length) throw createError({
+    if (existingUser) throw createError({
       statusCode: HTTP_STATUS.CONFLICT,
       statusMessage: "Username already exists.",
     });
 
-    const updatedUsers = await db
+    const updatedUser = await db
       .update(userSchema)
       .set({ username })
       .where(eq(userSchema.id, id))
-      .returning();
+      .returning()
+      .get();
+
+    if (!updatedUser) throw createError({
+      statusCode: HTTP_STATUS.NOT_FOUND,
+      statusMessage: "User not found.",
+    });
 
     return {
       statusCode: HTTP_STATUS.OK,
       statusMessage: "User updated.",
-      data: updatedUsers[0],
+      data: updatedUser,
     };
 
   } catch (error) {
