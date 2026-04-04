@@ -17,15 +17,16 @@ export default defineEventHandler(async (event) => {
 
     const db = useDb();
   
-    const qrOptions = await db
+    const qrOption = await db
       .select()
       .from(qrOptionSchema)
-      .where(eq(qrOptionSchema.userId, userId));
+      .where(eq(qrOptionSchema.userId, userId))
+      .get();
   
     return {
       statusCode: HTTP_STATUS.CREATED,
       statusMessage: "QR Options fetched.",
-      data: qrOptions[0],
+      data: qrOption,
     };
     
   } catch (error) {
