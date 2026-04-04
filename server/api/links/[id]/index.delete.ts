@@ -25,7 +25,10 @@ export default defineEventHandler(async (event) => {
       if (link?.userId) {
         user = await tx
           .update(userSchema)
-          .set({ hitCount: sql`hit_count - ${link.hitCount}` })
+          .set({
+            hitCount: sql`hit_count - ${link.hitCount}`,
+            linkCount: sql`link_count - 1`,
+          })
           .where(eq(userSchema.id, link.userId))
           .returning()
           .get();
