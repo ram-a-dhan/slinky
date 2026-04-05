@@ -14,16 +14,17 @@ export default defineEventHandler(async (event) => {
 
   const db = useDb();
 
-  const result = await db
+  const link = await db
     .select()
     .from(linkSchema)
     .where(and(
       eq(linkSchema.slug, slug),
       isNull(linkSchema.userId),
     ))
-    .limit(1);
+    .limit(1)
+    .get();
 
-  if (!result?.[0]?.target) throw createError({
+  if (!link?.target) throw createError({
     statusCode: HTTP_STATUS.NOT_FOUND,
     statusMessage: "Link not found."
   });
@@ -32,12 +33,46 @@ export default defineEventHandler(async (event) => {
   await access(
     db,
     linkSchema,
-    eq(linkSchema.id, result[0].id),
+    eq(linkSchema.id, link.id),
   );
 
-  return sendRedirect(
-    event,
-    result[0].target,
-    HTTP_STATUS.FOUND,
-  );
+  const config = useRuntimeConfig();
+
+  const html = `
+    <!DOCTYPE html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="robots" content="noindex, nofollow" />
+
+        <title>Slinky - Redirecting...</title>
+
+        <!-- OG tags -->
+        <meta property="og:title" content="Slinky - URL Shortener" />
+        <meta property="og:description" content="Shorten long URLs in one click, generate QR codes, with style!" />
+        <meta property="og:image" content="${config.public.BASE_URL}/og-image.png" />
+        <meta property="og:url" content="${config.public.BASE_URL}/go/${slug}" />
+
+        <!-- Twitter/X card -->
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content="${config.public.BASE_URL}/og-image.png" />
+
+        <style>
+          html { background: #ffffff; }
+          @media (prefers-color-scheme: dark) {
+            html { background: #000000; }
+          }
+        </style>
+
+        <meta http-equiv="refresh" content="0;url=${link.target}" />
+        <script>window.location.replace("${link.target}")<\/script>
+      </head>
+      <body></body>
+    </html>
+  `;
+
+  setHeader(event, "Content-Type", "text/html");
+
+  return html;
 });
