@@ -3,7 +3,7 @@ import { Preset } from "./primevue.config";
 export default defineNuxtConfig({
   site: {
     url: process.env.BASE_URL,
-    name: "Fast & Free URL Shortener",
+    name: "Slinky - URL Shortener",
     description: "Shorten long URLs in one click, generate QR codes, with style!",
     defaultLocale: "en",
   },
