@@ -4,34 +4,12 @@ const config = useRuntimeConfig();
 
 definePageMeta({ middleware: "guest" });
 
-useSeoMeta({
-  title: "Slinky - Free & Fast URL Shortener",
-  description: "Shorten long URLs in one click, generate QR codes, with style!",
-  ogTitle: "Slinky - Free & Fast URL Shortener",
-  ogDescription: "Shorten long URLs in one click, generate QR codes, with style!",
-  ogImage: `${config.public.BASE_URL}/og-image.png`,
-  twitterImage: `${config.public.BASE_URL}/og-image.png`,
-  twitterCard: "summary_large_image",
-});
-
-useSchemaOrg([
-  defineWebSite({
-    name: "Slinky",
-    url: config.public.BASE_URL,
-  }),
-  {
-    "@type": "WebApplication",
-    name: "URL Shortener",
-    applicationCategory: 'UtilitiesApplication',
-  },
-]);
-
 const isShowLogin = ref(false);
 
-const { isLoggedIn } = useAuthStore();
+const auth = useAuthStore();
 
 watchEffect(() => {
-  if (isLoggedIn) navigateTo('/dashboard');
+  if (auth.isLoggedIn) navigateTo('/dashboard');
 });
 
 const setIsShowLogin = () => {
@@ -58,6 +36,25 @@ const setIsShowLogin = () => {
   <HomeCard />
 </div>
 
+<Dialog
+  v-model:visible="auth.isLoading"
+  modal  
+>
+  <template #container>
+    <span class="loading">
+      <span>
+        Checking credentials...
+      </span>
+      <Button
+        severity="contrast"
+        variant="text"
+        disabled
+        icon="pi pi-spinner pi-spin"
+      />
+    </span>
+  </template>
+</Dialog>
+
 <LoginModal v-model:visible="isShowLogin" />
 </template>
 
@@ -78,4 +75,12 @@ const setIsShowLogin = () => {
   padding: 0 0.75rem 0.75rem;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  
+  > span {
+    padding: 0.75rem 0 0.75rem 0.75rem;
+  }
+}
 </style>

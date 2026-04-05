@@ -120,7 +120,7 @@ const setIsShowLinkDetail = (id?: string) => {
         </template>
       </Column>
       <template #empty>
-        <div class="empty">
+        <div class="empty" v-if="!loading">
           <i class="pi pi-inbox card__icon" />
           <p class="card__caption">
             Empty
