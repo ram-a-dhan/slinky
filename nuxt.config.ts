@@ -22,9 +22,6 @@ export default defineNuxtConfig({
       "/api",
     ],
   },
-  routeRules: {
-    "/": { prerender: true },
-  },
   compatibilityDate: "2025-07-15",
   css: [
     "~/assets/scss/main.scss",
